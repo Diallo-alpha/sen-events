@@ -42,18 +42,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function organismes()
-    {
-        return $this->hasMany(Organisme::class);
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'permissions');
-    }
 
     public function reservations()
     {
-        return $this->belongsToMany(Evenement::class, 'reservations');
+        return $this->hasMany(Reservation::class);
     }
 }

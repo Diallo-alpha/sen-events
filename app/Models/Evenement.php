@@ -12,13 +12,13 @@ class Evenement extends Model
         'nom', 'description', 'date_evenement', 'lieu', 'places_disponible', 'date_limite', 'photo', 'organisme_id',
     ];
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function organisme()
     {
         return $this->belongsTo(Organisme::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'reservations');
     }
 }

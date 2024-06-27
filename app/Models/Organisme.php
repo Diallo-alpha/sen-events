@@ -12,10 +12,6 @@ class Organisme extends Model
         'nom', 'description', 'logo', 'adresse', 'secteur_activite', 'ninea', 'date_creation',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function evenements()
     {
