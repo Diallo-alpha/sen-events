@@ -1,93 +1,44 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEN-EVENTS - Connexion</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            min-height: 100vh;
-        }
-
-        .left-panel,
-        .right-panel {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .left-panel {
-            background: url('Left2.png') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
-
-        .left-panel img {
-            width: 80%;
-        }
-
-        .right-panel {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .registration-form {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 767.98px) {
-            .left-panel {
-                height: 200px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .left-panel,
-            .right-panel {
-                flex: 1;
-            }
-        }
-    </style>
-</head><body>
-    <div class="container">
-        <div class="left-panel">
-            <div>
-                <h1>SEN-EVENTS</h1>
-                <!-- <img src="Left2.png" alt="" class="img-fluid d-none d-md-block"> -->
-                <div class="d-flex justify-content-center mt-3 pt-10">
-                    <span class="badge badge-primary mx-1 my-80 pt-80">•</span>
-                    <span class="badge badge-primary mx-1 my-80 pt-80">•</span>
-                    <span class="badge badge-primary mx-1 my-80 pt-80">•</span>
+    <title>Sen-Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center image-container">
+                <h1 class="text-white">SEN-EVENTS</h1>
+                <div class="social-icons mt-3">
+                    <img src="{{ asset('images/Left.svg') }}" alt="SEN-EVENTS" class="img-fluid">
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
+            <div class="col-md-6 form-container">
+                <h2 class="text-center mb-4">S'INSCRIRE</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="alpha.diallo@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mots de passe</label>
+                        <input type="password" class="form-control" id="password" placeholder="Mots de passe">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">SE CONNECTER</button>
+                </form>
+            </div>
         </div>
-        <div class="right-panel">
-            <form class="registration-form">
-                <h2>Connexion</h2>
-               
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="email@exemple.com">
-                </div>
-                <div class="form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" placeholder="Mot de passe">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Connexion</button>
-            </form>
-        </div>
-    </div><script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body></html>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+</body>
+</html>
