@@ -27,6 +27,10 @@ class RedirectIfAuthenticated
                 {
                     return redirect()->route('admin.dashboard');
                 }
+                elseif ($guard === 'organisme' && Route::is('organisme.*'))
+                    {
+                        return redirect()->route('organisme.dashboard');
+                    }
                 else {
                     return redirect()->route('dashboard');
             }

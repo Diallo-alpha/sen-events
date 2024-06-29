@@ -43,6 +43,12 @@ class Authenticate
                     return route('admin.login');
                 }
 
+            # organisme
+            if(Route::is('organisme.*'))
+                {
+                    return route('organisme.login');
+                }
+
             return route('login');
         }
 }
