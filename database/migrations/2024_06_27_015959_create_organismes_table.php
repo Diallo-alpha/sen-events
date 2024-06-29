@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->text('description');
-            $table->string('logo');
+            $table->string('logo')->default('')->change();
             $table->string('adresse');
             $table->string('secteur_activite');
             $table->string('ninea');
