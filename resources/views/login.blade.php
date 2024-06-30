@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-6 form-container">
-                <h2 class="text-center mb-4">S'INSCRIRE</h2>
+                <h2 class="text-center mb-4">Se Connecter</h2>
                 <form>
                     <div class="form-group">
                         <label for="email">Email</label>

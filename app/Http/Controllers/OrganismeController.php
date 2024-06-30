@@ -9,12 +9,12 @@ class OrganismeController extends Controller
     public function index()
     {
         $organismes = Organisme::all();
-        return view('organismes.index', compact('organismes'));
+        return view('/index', compact('organismes'));
     }
 
     public function create()
     {
-        return view('organismes.create');
+        return view('create');
     }
 
     public function store(Request $request)
@@ -30,17 +30,17 @@ class OrganismeController extends Controller
 
         Organisme::create($request->all());
 
-        return redirect()->route('organismes.index')->with('success', 'Organisme created successfully.');
+        return redirect()->route('index')->with('success', 'Organisme created successfully.');
     }
 
     public function show(Organisme $organisme)
     {
-        return view('organismes.show', compact('organisme'));
+        return view('show', compact('organisme'));
     }
 
     public function edit(Organisme $organisme)
     {
-        return view('organismes.edit', compact('organisme'));
+        return view('edit', compact('organisme'));
     }
 
     public function update(Request $request, Organisme $organisme)
@@ -56,13 +56,13 @@ class OrganismeController extends Controller
 
         $organisme->update($request->all());
 
-        return redirect()->route('organismes.index')->with('success', 'Organisme updated successfully.');
+        return redirect()->route('index')->with('success', 'Organisme updated successfully.');
     }
 
     public function destroy(Organisme $organisme)
     {
         $organisme->delete();
 
-        return redirect()->route('organismes.index')->with('success', 'Organisme deleted successfully.');
+        return redirect()->route('index')->with('success', 'Organisme deleted successfully.');
     }
 }

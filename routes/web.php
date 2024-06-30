@@ -1,6 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\OrganismeController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReservationController;
+
+
+
+
 
 Route::get('/', function () {
     return view('login');
@@ -9,11 +18,10 @@ Route::get('/', function () {
 
 Route::resource('organismes', OrganismeController::class);
 
-Route::get('organismes', [OrganismeController::class, 'index'])->name('organismes.index');
-Route::get('organismes/create', [OrganismeController::class, 'create'])->name('organismes.create');
-Route::post('organismes', [OrganismeController::class, 'store'])->name('organismes.store');
-Route::get('organismes/{organisme}', [OrganismeController::class, 'show'])->name('organismes.show');
-Route::get('organismes/{organisme}/edit', [OrganismeController::class, 'edit'])->name('organismes.edit');
-Route::put('organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
-Route::patch('organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
-Route::delete('organismes/{organisme}', [OrganismeController::class, 'destroy'])->name('organismes.destroy');
+
+Route::resource('users', UserController::class);
+Route::resource('events', EvenementController::class);
+Route::resource('reservations', ReservationController::class);
+Route::resource('organismes', OrganismeController::class);
+Route::resource('permissions', PermissionController::class);
+Route::resource('roles', RoleController::class);
