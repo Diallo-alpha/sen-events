@@ -9,12 +9,12 @@ class OrganismeController extends Controller
     public function index()
     {
         $organismes = Organisme::all();
-        return view('organismes.index', compact('organismes'));
+        return view('organisme.index', compact('organismes'));
     }
 
     public function create()
     {
-        return view('organismes.create');
+        return view('organisme.create');
     }
 
     public function store(Request $request)
