@@ -1,8 +1,8 @@
 <?php
-use App\Http\Controllers\Organisme\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Organisme\Auth\ProfileController;
-use App\Http\Controllers\Organisme\Auth\PasswordController;
+use App\Http\Controllers\Organisme\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Organisme\OrganismeController;
+
 
 Route::prefix('organisme')->name('organisme.')->group(function () {
     Route::middleware('guest:organisme')->group(function () {
@@ -13,17 +13,15 @@ Route::prefix('organisme')->name('organisme.')->group(function () {
     });
 
     Route::middleware('auth:organisme')->group(function () {
-        Route::get('dashboard', function () {
-            return view('organisme.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [OrganismeController::class, 'index'])->name('dashboard');
+        Route::get('/evenements', [OrganismeController::class, 'evenements'])->name('evenements');
+        Route::get('/utilisateurs', [OrganismeController::class, 'inscrit'])->name('inscrit');
 
-        Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
 
-        Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });

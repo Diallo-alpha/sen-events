@@ -32,7 +32,7 @@ class RedirectIfAuthenticated
                         return redirect()->route('organisme.dashboard');
                     }
                 else {
-                    return redirect()->route('dashboard');
+                    return redirect()->route('portail.index');
             }
         }
 

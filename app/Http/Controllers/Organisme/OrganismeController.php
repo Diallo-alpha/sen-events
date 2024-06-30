@@ -1,17 +1,27 @@
 <?php
-namespace App\Http\Controllers;
 
-use App\Models\Organisme;
+namespace App\Http\Controllers\Organisme;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class OrganismeController extends Controller
 {
+    //view dashboard organisme
     public function index()
     {
-        $organismes = Organisme::all();
-        return view('organisme.index', compact('organismes'));
+       return view('organisme.dashboard');
     }
 
+    //view inscrit organisme
+    public function inscrit ()
+        {
+            return view('organisme.inscrit');
+        }
+    //view evenements 
+    public function evenements ()
+        {
+            return view('organisme.evenement');
+        }
     public function create()
     {
         return view('organisme.create');
