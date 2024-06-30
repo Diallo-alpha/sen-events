@@ -18,7 +18,7 @@
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="col-md-6 right d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-6 right d-flex flex-column align-items-center justify-content-center right">
                 <h1>inscription</h1>
                 <h2>connexion</h2>
                 <form>
