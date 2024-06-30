@@ -1,0 +1,200 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+:root {
+    --Primaire: #007BFF;
+    --fond-page: #F8F9FA;
+    --secondaires: #28A745;
+    --gris-fonce: #CBD5E1;
+    --gray-100: #F4F4F5;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--fond-page);
+}
+
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    background-color: var(--Primaire);
+    color: white;
+    margin-left: -20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.button {
+    background-color: var(--Primaire);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Hero section */
+.hero {
+    margin-top: -19.5px;
+    width: 100%;
+    height: 657px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    flex-shrink: 0;
+}
+.hero .container {
+    width: 100%;
+    height: 627px;
+    background-color: #333;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    flex-shrink: 0;
+}
+
+.gradient-text {
+    background: linear-gradient(105deg, #FF3337 -0.04%, #F8CA53 23.08%, #009A8F 38.7%, rgba(255, 255, 255, 0.19) 72.71%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 560px;
+    height: 299px;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 140px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 153px; /* 109.286% */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.text-hero {
+    color: var(--gray-100);
+    text-align: justify;
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4.16px;
+}
+
+.buttonEv {
+    background-color: #00c853;
+    color: white;
+    padding: 15px 30px;
+    text-align: start;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4.16px;
+}
+.buttonEv:hover{
+    color: var(--Primaire, #007BFF);
+    background: var(--grirs-claire, #F8F9FA);
+    text-decoration: none;
+}
+/*
+A pro
+**/
+/* End hero section */
+/*A propos*/
+.a-propos{
+    color: var(--Primaire, #007BFF);
+
+}
+/*end propos*/
+/*card*/
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.icone{
+    color: var(--Primaire, #007BFF);
+
+}
+.card-img-top {
+    height: 200px; /* Ajustez la hauteur si nécessaire */
+    object-fit: cover;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.text-primary {
+    color: var(--Primaire);
+}
+
+.fas {
+    margin-right: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+/***page detailles*/
+.event-header {
+    background-image: url('afbe9d6dfcb9da7c55ddfd60598c82b0 1.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    /* position: fixed; */
+}
+
+.event-header img {
+    max-width: 100%;
+    height: auto;
+}
+
+.event-details {
+    margin-top: 80px;
+    padding: 20px;
+}
