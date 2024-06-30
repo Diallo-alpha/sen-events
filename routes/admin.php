@@ -17,5 +17,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/association', [AdminController::class, 'association'])->name('association');
         Route::get('/evenements', [AdminController::class, 'evenements'])->name('evenements');
         Route::get('/utilisateurs', [AdminController::class, 'utilisateur'])->name('utilisateurs');
+
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
     });
 });

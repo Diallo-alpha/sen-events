@@ -58,12 +58,16 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
                         <span class="title">Deconnexion</span>
                     </a>
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>
