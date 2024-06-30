@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>@yield('title', 'Admin Dashboard')</title>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 
 <body>
-    <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
             <ul>
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            {{-- <ion-icon name="logo-apple"></ion-icon> --}}
                         </span>
-                        <span class="title">Alpha Diallo</span>
+                        <span class="title">@yield('titre-page', 'Admin')</span>
                     </a>
                 </li>
 
@@ -36,75 +34,90 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
+                            <ion-icon name="book-outline"></ion-icon>
                         </span>
-                        <span class="title">Inscrits</span>
+                        <span class="title">Evenements</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="book-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Evénements</span>
+                        <span class="title">Associations</span>
                     </a>
                 </li>
 
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Utilisateurs</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title">Deconection</span>
+                        <span class="title">Deconnexion</span>
                     </a>
                 </li>
             </ul>
         </div>
-
-        <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-
                 <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                    <img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">05</div>
+                        <div class="cardName">Evenements</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">100</div>
+                        <div class="cardName">Associations</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">12000</div>
+                        <div class="cardName">Utilisateurs</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
                 </div>
             </div>
 
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox mt-13">
-                <div class="card">
-                    <div>
-                        <div class="numbers">10000</div>
-                        <div class="cardName">Places Réservées</div>
-                    </div>
+            <!-- Ici doit s'afficher les tous les cruds -->
+            <div class="content">
+                @yield('content')
+            </div>
 
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">12</div>
-                        <div class="cardName">Evenements</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-            <!-- ================ Order Details List ================= -->
-
-      <!-- Ici doit s'afficher les tous les cruds -->
-
+        </div>
+    </div>
 
     <!-- =========== Scripts =========  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

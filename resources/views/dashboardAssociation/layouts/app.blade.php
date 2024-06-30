@@ -5,22 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>@yield('title', 'Tableau de board association')</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 
 <body>
-    <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
             <ul>
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            {{-- <ion-icon name="logo-apple"></ion-icon> --}}
                         </span>
-                        <span class="title">Alpha Diallo</span>
+                        <span class="title">@yield('titre-page', 'Admin')</span>
                     </a>
                 </li>
 
@@ -36,29 +35,21 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="book-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Evenements</span>
+                        <span class="title">Inscrits</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="community-outline"></ion-icon>
+                            <ion-icon name="book-outline"></ion-icon>
                         </span>
-                        <span class="title">Associations</span>
+                        <span class="title">Evénements</span>
                     </a>
                 </li>
 
-               <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Utilisateurs</span>
-                    </a>
-                </li>
                 <li>
                     <a href="#">
                         <span class="icon">
@@ -71,21 +62,33 @@
         </div>
 
         <!-- ========================= Main ==================== -->
-            <div class="main">
-                <div class="topbar">
-                    <div class="toggle">
-                        <ion-icon name="menu-outline"></ion-icon>
-                    </div>
-                    <div class="user">
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="user">
                     <img src="assets/imgs/customer01.jpg" alt="">
                 </div>
             </div>
 
             <!-- ======================= Cards ================== -->
-                <div class="cardBox">
-                    <div class="card">
-                        <div>
-                            <div class="numbers">05</div>
+            <div class="cardBox mt-13">
+                <div class="card">
+                    <div>
+                        <div class="numbers">10000</div>
+                        <div class="cardName">Places Réservées</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">12</div>
                         <div class="cardName">Evenements</div>
                     </div>
 
@@ -93,40 +96,16 @@
                         <ion-icon name="eye-outline"></ion-icon>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">100</div>
-                        <div class="cardName">Associations</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">12000</div>
-                        <div class="cardName">utilisateurs</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
             </div>
-
-
+            <div class="content">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 
             <!-- ================ Order Details List ================= -->
 
-
-
-                       <!-- Ici doit s'afficher les tous les cruds -->
-
+      <!-- Ici doit s'afficher les tous les cruds -->
 
 
     <!-- =========== Scripts =========  -->
