@@ -12,11 +12,11 @@
     <div class="container-nav">
         <div class="logo">Sen-Events</div>
         <div class="nav-links">
-            <a href="#" class="nav-link">Accueil</a>
+            <a href="{{ route('portail.index') }}" class="nav-link">Accueil</a>
             <a href="#" class="nav-link">Evenements</a>
             <a href="#" class="nav-link">A Propos</a>
         </div>
-        <a href="#" class="button">Connexion</a>
+        <a href="{{ route('login') }}" class="button">Connexion</a>
     </div>
     <section class="hero">
         <div class="container">
@@ -66,7 +66,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                                     <span class="text-primary"><i class="fas fa-map-marker-alt"></i> King fakhad pace</span><br>
                                     Participez à notre atelier interactif et découvrez les dernières tendances en matière de développement personnel et de bien-être.
                                 </p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events') }}" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
                     </div>

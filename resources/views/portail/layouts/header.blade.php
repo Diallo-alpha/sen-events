@@ -12,9 +12,9 @@
     <div class="container-nav">
         <div class="logo">Sen-Events</div>
         <div class="nav-links">
-            <a href="#" class="nav-link">Accueil</a>
+            <a href="{{ route('portail.index') }}" class="nav-link">Accueil</a>
             <a href="#" class="nav-link">Evenements</a>
             <a href="#" class="nav-link">A Propos</a>
         </div>
-        <a href="#" class="button">Connexion</a>
+        <a href="{{ route('login') }}" class="button">Connexion</a>
     </div>
