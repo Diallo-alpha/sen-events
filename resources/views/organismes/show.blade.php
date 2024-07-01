@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboardAssociation.layouts.app')
 
 @section('content')
     <h1>Organisme Details</h1>

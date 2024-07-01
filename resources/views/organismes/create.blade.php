@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboardAssociation.layouts.app')
 
 @section('content')
     <h1>Create Organisme</h1>
@@ -10,17 +10,26 @@
         <label for="description">Description:</label>
         <textarea name="description" id="description" required></textarea>
 
-        <label for="logo">Logo:</label>
-        <input type="text" name="logo" id="logo">
+        <div class="mb-3">
+            <label for="logo" class="form-label">Logo</label>
+            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo">
+            @error('logo')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
         <label for="adresse">Adresse:</label>
         <input type="text" name="adresse" id="adresse" required>
 
         <label for="secteur_activite">Secteur d'Activité:</label>
         <input type="text" name="secteur_activite" id="secteur_activite" required>
-
-        <label for="ninea">Ninea:</label>
-        <input type="text" name="ninea" id="ninea" required>
+        <div class="mb-3">
+            <label for="ninea" class="form-label">Ninea</label>
+            <input type="file" class="form-control @error('ninea') is-invalid @enderror" id="ninea" name="ninea">
+            @error('ninea')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
         <label for="date_creation">Date de Création:</label>
         <input type="date" name="date_creation" id="date_creation" required>

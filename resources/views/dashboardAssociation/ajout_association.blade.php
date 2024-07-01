@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creation Evenement</title>
+    <title>Creation Association</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
@@ -12,7 +12,7 @@
         <div class="row no-gutters">
             <div class="col-md-6 left d-flex align-items-center justify-content-center">
                 <div class="content text-center">
-                    <img src="{{ asset('images/Left.svg') }}" alt="SEN-EVENTS" class="img-fluid">
+                    <img src="{{ asset('images/Left.svg') }}" alt="Parler nous de votre societer " class="img-fluid">
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -27,9 +27,12 @@
                             <label for="nom">Nom</label>
                             <input type="nom" class="form-control" id="nom" placeholder="SEN-EVENTS">
                         </div>
-                        <div class="form-group">
-                            <label for="nom">Ninea</label>
-                            <input type="ninea" class="form-control" id="ninea" placeholder="ninea">
+                        <div class="mb-3">
+                            <label for="ninea" class="form-label">Ninea</label>
+                            <input type="file" class="form-control @error('ninea') is-invalid @enderror" id="ninea" name="ninea">
+                            @error('ninea')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="logo" class="form-label">Logo</label>
@@ -57,7 +60,7 @@
                         <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
                     <br>
-                   <a href="#"><span>Se connecter</span></a>
+                   <button type="login" class="btn btn-primary">Se connecter</button>
                 </div>
             </div>
         </div>

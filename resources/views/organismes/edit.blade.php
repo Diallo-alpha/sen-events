@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboardAssociation.layouts.app')
 
 @section('content')
     <h1>Edit Organisme</h1>
@@ -28,5 +28,6 @@
         <input type="date" name="date_creation" id="date_creation" value="{{ $organisme->date_creation }}" required>
 
         <button type="submit">Submit</button>
-    </form>
+    </form>    <a href="{{ route('organismes.index') }}">Back to list</a>
+
 @endsection

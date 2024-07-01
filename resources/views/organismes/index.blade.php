@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboardAssociation.layouts.app')
 
 @section('content')
     <h1>Organismes</h1>
@@ -16,4 +16,4 @@
             </li>
         @endforeach
     </ul>
-@endsection
+    @endsection
