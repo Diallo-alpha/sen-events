@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 @extends('dashboardAssociation.layouts.app')
 
 
@@ -11,6 +12,14 @@
             <label for="nom" class="form-label">Nom</label>
             <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom', $evenement->nom) }}">
             @error('nom')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+      
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+            @error('photo')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -49,14 +58,10 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="photo" class="form-label">Photo</label>
-            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
-            @error('photo')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+      
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+

@@ -48,6 +48,7 @@ class EvenementController extends Controller
         $evenement->lieu = $request->lieu;
         $evenement->places_disponible = $request->places_disponible;
         $evenement->date_limite = $request->date_limite;
+        $evenement->organisme_id = $request->organisme_id;
 
         $evenement = new Evenement();
         $evenement->fill($request->except('photo'));
