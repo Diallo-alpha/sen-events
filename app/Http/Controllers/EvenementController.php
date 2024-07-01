@@ -31,7 +31,8 @@ class EvenementController extends Controller
             'date_evenement' => 'required|date',
             'lieu' => 'required|string|min:3',
             'places_disponible' => 'required|integer|min:1',
-            'date_limite' => 'nullable|date'
+            'date_limite' => 'nullable|date',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -47,6 +48,16 @@ class EvenementController extends Controller
         $evenement->lieu = $request->lieu;
         $evenement->places_disponible = $request->places_disponible;
         $evenement->date_limite = $request->date_limite;
+
+        $evenement = new Evenement();
+        $evenement->fill($request->except('photo'));
+
+        if ($request->hasFile('photo')) {
+            $imageName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images'), $imageName);
+            $evenement->photo = $imageName;
+        }
+
         $evenement->save();
 
         return redirect()->route('evenements.index')->with('success', 'Evenement ajouté avec succès.');
@@ -68,7 +79,8 @@ class EvenementController extends Controller
             'date_evenement' => 'required|date',
             'lieu' => 'required|string|min:3',
             'places_disponible' => 'required|integer|min:1',
-            'date_limite' => 'nullable|date'
+            'date_limite' => 'nullable|date',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -84,6 +96,15 @@ class EvenementController extends Controller
         $evenement->lieu = $request->lieu;
         $evenement->places_disponible = $request->places_disponible;
         $evenement->date_limite = $request->date_limite;
+
+        $evenement = Evenement::findOrFail($id);
+        $evenement->fill($request->except('photo'));
+
+        if ($request->hasFile('photo')) {
+            $imageName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images'), $imageName);
+            $evenement->photo = $imageName;
+        }
         $evenement->save();
 
         return redirect()->route('evenements.index')->with('success', 'Evenement mis à jour avec succès.');
