@@ -20,8 +20,11 @@ Route::resource('organismes', OrganismeController::class);
 
 
 Route::resource('users', UserController::class);
-Route::resource('events', EvenementController::class);
+Route::resource('evenements', EvenementController::class);
 Route::resource('reservations', ReservationController::class);
 Route::resource('organismes', OrganismeController::class);
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class);
+
+
+
