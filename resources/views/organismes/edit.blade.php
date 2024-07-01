@@ -1,5 +1,4 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 @extends('dashboardAssociation.layouts.app')
 
 @section('content')
@@ -10,12 +9,12 @@
 
         <label for="nom">Nom:</label>
         <input type="text" name="nom" id="nom" value="{{ $organisme->nom }}" required>
+        
+        <label for="logo">Logo:</label>
+        <input type="file" name="logo" id="logo" value="{{ $organisme->logo }}">
 
         <label for="description">Description:</label>
         <textarea name="description" id="description" required>{{ $organisme->description }}</textarea>
-
-        <label for="logo">Logo:</label>
-        <input type="text" name="logo" id="logo" value="{{ $organisme->logo }}">
 
         <label for="adresse">Adresse:</label>
         <input type="text" name="adresse" id="adresse" value="{{ $organisme->adresse }}" required>
@@ -24,7 +23,7 @@
         <input type="text" name="secteur_activite" id="secteur_activite" value="{{ $organisme->secteur_activite }}" required>
 
         <label for="ninea">Ninea:</label>
-        <input type="text" name="ninea" id="ninea" value="{{ $organisme->ninea }}" required>
+        <input type="file" name="ninea" id="ninea" value="{{ $organisme->ninea }}" required>
 
         <label for="date_creation">Date de Création:</label>
         <input type="date" name="date_creation" id="date_creation" value="{{ $organisme->date_creation }}" required>

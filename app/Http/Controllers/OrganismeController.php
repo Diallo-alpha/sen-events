@@ -42,12 +42,32 @@ class OrganismeController extends Controller
         // Validate the incoming request data
         $request->validate([
             'nom' => 'required|string|max:255',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
             'adresse' => 'required|string',
             'secteur_activite' => 'required|string',
-            'ninea' => 'required|string|max:255',
+            'ninea' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_creation' => 'required|date',
         ]);
+    
+        // Handle file upload
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo')->store('logos', 'public');
+            $request->merge(['logo' => $logo]);
+        }
+    
+        if ($request->hasFile('ninea')) {
+            $ninea = $request->file('ninea')->store('ninea', 'public');
+            $request->merge(['ninea' => $ninea]);
+        }
+    
+        // Create a new Organisme using the request data
+        Organisme::create($request->all());
+    
+        // Redirect to the index route with a success message
+        return redirect()->route('organismes.index')->with('success', 'Organisme created successfully.');
+     
+    
 
         // Create a new Organisme using the request data
         Organisme::create($request->all());
@@ -92,10 +112,11 @@ class OrganismeController extends Controller
         // Validate the incoming request data
         $request->validate([
             'nom' => 'required|string|max:255',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
             'adresse' => 'required|string',
             'secteur_activite' => 'required|string',
-            'ninea' => 'required|string|max:255',
+            'ninea' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_creation' => 'required|date',
         ]);
 

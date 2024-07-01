@@ -27,12 +27,12 @@ class EvenementController extends Controller
     {
         $rules = [
             'nom' => 'required|min:5',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'date_evenement' => 'required|date',
             'lieu' => 'required|string|min:3',
             'places_disponible' => 'required|integer|min:1',
             'date_limite' => 'nullable|date',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -76,12 +76,12 @@ class EvenementController extends Controller
     {
         $rules = [
             'nom' => 'required|min:5',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'date_evenement' => 'required|date',
             'lieu' => 'required|string|min:3',
             'places_disponible' => 'required|integer|min:1',
             'date_limite' => 'nullable|date',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);

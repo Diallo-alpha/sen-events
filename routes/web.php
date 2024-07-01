@@ -17,8 +17,6 @@ Route::get('/', function () {
 
 
 // Route::resource('organismes', OrganismeController::class);
-
-
 Route::resource('users', UserController::class);
 Route::resource('evenements', EvenementController::class);
 Route::resource('reservations', ReservationController::class);

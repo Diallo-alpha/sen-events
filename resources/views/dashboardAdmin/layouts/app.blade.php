@@ -16,7 +16,6 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            {{-- <ion-icon name="logo-apple"></ion-icon> --}}
                         </span>
                         <span class="title">@yield('titre-page', 'Admin')</span>
                     </a>
@@ -117,7 +116,7 @@
     </div>
 
     <!-- =========== Scripts =========  -->
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('public/js/admin.js') }}"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
