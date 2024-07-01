@@ -8,13 +8,14 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Photo</th>
+
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Date</th>
                 <th>Lieu</th>
                 <th>Places Disponible</th>
                 <th>Date Limite</th>
+                <th>Photo</th>
                 <th>Actions</th>
             </tr>
         </thead>

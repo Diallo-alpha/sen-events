@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Create Evenement</h1>
-    <form action="{{ route('evenements.store') }}" method="POST">
+    <form action="{{ route('evenements.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="nom" class="form-label">Nom</label>
@@ -44,6 +44,13 @@
             <label for="date_limite" class="form-label">Date Limite</label>
             <input type="date" class="form-control @error('date_limite') is-invalid @enderror" id="date_limite" name="date_limite" value="{{ old('date_limite') }}">
             @error('date_limite')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+            @error('photo')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
