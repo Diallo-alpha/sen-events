@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Organisme;
-use App\Http\Controllers\Controller;
+use App\Models\Organisme;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrganismeController extends Controller
 {
@@ -17,7 +18,7 @@ class OrganismeController extends Controller
         {
             return view('organisme.inscrit');
         }
-    //view evenements 
+    //view evenements
     public function evenements ()
         {
             return view('organisme.evenement');
