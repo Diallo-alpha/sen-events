@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Evenement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nom', 'description', 'date_evenement', 'lieu', 'places_disponible', 'date_limite', 'photo', 'organisme_id',
+        'nom', 'photo' ,'description', 'date_evenement', 'lieu', 'places_disponible', 'date_limite', 'organisme_id',
     ];
 
     public function organisme()
