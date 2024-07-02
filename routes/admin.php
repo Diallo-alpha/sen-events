@@ -20,8 +20,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/utilisateurs', [AdminController::class, 'utilisateur'])->name('utilisateurs');
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-        // Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
-        // Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
+        Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
+        Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
 
     });
     // Route::middleware(['auth:admins', 'role:admin'])->group(function () {
