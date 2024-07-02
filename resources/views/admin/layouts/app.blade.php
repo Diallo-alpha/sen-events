@@ -57,6 +57,14 @@
                         <span class="title">Utilisateurs</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.roles.create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.roles.create') }}">
+                        <span class="icon">
+                            <ion-icon name="add-outline"></ion-icon>
+                        </span>
+                        <span class="title">Create Role</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('admin.logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
