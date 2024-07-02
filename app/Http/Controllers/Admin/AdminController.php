@@ -46,9 +46,15 @@ class AdminController extends Controller
     public function utilisateur()
     {
         list($eventCount, $associationCount, $userCount) = $this->getCounters();
-        $users = User::all();
+
+        // Exclure les utilisateurs ayant le rôle d'administrateur
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+
         return view('admin.utilisateur', compact('eventCount', 'associationCount', 'userCount', 'users'));
     }
+
 
     // Supprimer un utilisateur
     public function deleteUser($id)
