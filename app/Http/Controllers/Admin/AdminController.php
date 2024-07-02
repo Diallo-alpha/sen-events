@@ -1,29 +1,80 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Association;
+use App\Models\Organisme;
+use App\Models\User;
+use App\Models\Evenement;
 
 class AdminController extends Controller
 {
-    //index admin
+    private function getCounters()
+    {
+        $eventCount = Evenement::count();
+        $associationCount = Organisme::count();
+        $userCount = User::count();
+
+        return [$eventCount, $associationCount, $userCount];
+    }
+
+    // Index admin
     public function dashboard()
-        {
-            return view('admin.dashboard');
-        }
-    //evenement admin
+    {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
+    }
+
+    // Evenement admin
     public function evenements()
-        {
-            return view('admin.evenement');
-        }
-    //association admin
+    {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount'));
+    }
+
+    // Association admin
     public function association()
-        {
-            return view('admin.association');
-        }
-    //afficher la liste des utilisateur
+    {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        $associations = Organisme::all();
+        return view('admin.association', compact('eventCount', 'associationCount', 'userCount', 'associations'));
+    }
+
+    // Afficher la liste des utilisateurs
     public function utilisateur()
-        {
-            return view('admin.utilisateur');
+    {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+
+        // Exclure les utilisateurs ayant le rôle d'administrateur
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+
+        return view('admin.utilisateur', compact('eventCount', 'associationCount', 'userCount', 'users'));
+    }
+
+
+    // Supprimer un utilisateur
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return redirect()->route('admin.utilisateur')->with('success', 'Utilisateur supprimé avec succès.');
         }
+        return redirect()->route('admin.utilisateur')->with('error', 'Utilisateur introuvable.');
+    }
+
+    // Supprimer une association
+    public function deleteAssociation($id)
+    {
+        $association = Organisme::find($id);
+        if ($association) {
+            $association->delete();
+            return redirect()->route('admin.association')->with('success', 'Association supprimée avec succès.');
+        }
+        return redirect()->route('admin.association')->with('error', 'Association introuvable.');
+    }
 }

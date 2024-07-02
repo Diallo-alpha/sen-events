@@ -16,5 +16,14 @@
             <a href="#" class="nav-link">Evenements</a>
             <a href="#" class="nav-link">A Propos</a>
         </div>
+        @if (Auth::check())
+        <a href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+           class="button">Déconnexion</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
         <a href="{{ route('login') }}" class="button">Connexion</a>
+    @endif
     </div>
