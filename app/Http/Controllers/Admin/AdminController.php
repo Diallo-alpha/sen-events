@@ -7,33 +7,47 @@ use Illuminate\Http\Request;
 use App\Models\Association;
 use App\Models\Organisme;
 use App\Models\User;
+use App\Models\Evenement;
 
 class AdminController extends Controller
 {
+    private function getCounters()
+    {
+        $eventCount = Evenement::count();
+        $associationCount = Organisme::count();
+        $userCount = User::count();
+
+        return [$eventCount, $associationCount, $userCount];
+    }
+
     // Index admin
     public function dashboard()
     {
-        return view('admin.dashboard');
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
     }
 
     // Evenement admin
     public function evenements()
     {
-        return view('admin.evenement');
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount'));
     }
 
     // Association admin
     public function association()
     {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
         $associations = Organisme::all();
-        return view('admin.association', compact('associations'));
+        return view('admin.association', compact('eventCount', 'associationCount', 'userCount', 'associations'));
     }
 
     // Afficher la liste des utilisateurs
     public function utilisateur()
     {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
         $users = User::all();
-        return view('admin.utilisateur', compact('users'));
+        return view('admin.utilisateur', compact('eventCount', 'associationCount', 'userCount', 'users'));
     }
 
     // Supprimer un utilisateur

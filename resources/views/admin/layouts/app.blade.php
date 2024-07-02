@@ -91,42 +91,13 @@
                 </div> --}}
             </div>
             <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">05</div>
-                        <div class="cardName">Evenements</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">100</div>
-                        <div class="cardName">Associations</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">12000</div>
-                        <div class="cardName">Utilisateurs</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
+               @yield('cardBox')
             </div>
 
             <!-- Ici doit s'afficher les tous les cruds -->
             <div class="content">
                 @yield('content')
             </div>
-
         </div>
     </div>
 
