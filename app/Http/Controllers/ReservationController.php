@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -9,19 +10,21 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::all();
-        return view('portail.reservations.index', compact('reservations'));
+
+        return view('reservations.index', compact('reservations'));
     }
 
     public function create()
     {
-        return view('portail.reservations.create');
+        $evenements = Evenement::all();
+        return view('reservations.create' ,  compact('evenements'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'evenement_id' => 'required',
-            'user_id' => 'required',
+            'evenement' => 'required',
+            'user' => 'required',
             'statut' => 'required',
         ]);
 
@@ -32,12 +35,12 @@ class ReservationController extends Controller
 
     public function show(Reservation $reservation)
     {
-        return view('portail.reservations.show', compact('reservation'));
+        return view('reservations.show', compact('reservation'));
     }
 
     public function edit(Reservation $reservation)
     {
-        return view('portail.reservations.edit', compact('reservation'));
+        return view('reservations.edit', compact('reservation'));
     }
 
     public function update(Request $request, Reservation $reservation)
