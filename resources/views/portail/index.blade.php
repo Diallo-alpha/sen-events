@@ -6,7 +6,7 @@
     <title>Sen-Events</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
     <div class="container-nav">
@@ -17,11 +17,25 @@
             <a href="#" class="nav-link">A Propos</a>
         </div>
 
-        @if (Auth::check())
+        @if (Auth::guard('web')->check())
             <a href="{{ route('logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                class="button">Déconnexion</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @elseif (Auth::guard('organisme')->check())
+            <a href="{{ route('organisme.logout') }}"
+               onclick="event.preventDefault(); document.getElementById('organisme-logout-form').submit();"
+               class="button">Déconnexion</a>
+            <form id="organisme-logout-form" action="{{ route('organisme.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @elseif (Auth::guard('admins')->check())
+            <a href="{{ route('admin.logout') }}"
+               onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();"
+               class="button">Déconnexion</a>
+            <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         @else
@@ -32,13 +46,18 @@
         <div class="container">
             <div class="row">
                 <div>
-                <h1><span class="gradient-text">SEN</span><br><span class="gradient-text"> EVENTS</span></h1>
-            </div>
-            <div>
-                <p class="text-hero">Organisez et Gérez Vos Événements en Toute <br> Simplicité</p>
-            </div>
-            <div>
-                <a href="#" class="buttonEv">Créer un évènements</a>            </div>
+                    <h1><span class="gradient-text">SEN</span><br><span class="gradient-text"> EVENTS</span></h1>
+                </div>
+                <div>
+                    <p class="text-hero">Organisez et Gérez Vos Événements en Toute <br> Simplicité</p>
+                </div>
+                <div>
+                    @if (Auth::guard('organisme')->check())
+                        <a href="{{ route('evenement.create') }}" class="buttonEv">Créer un évènement</a>
+                    @else
+                        <a href="{{ route('organisme.register-organisme') }}" class="buttonEv">Créer un évènements</a>
+                    @endif
+                </div>
             </div>
         </div>
     </section>

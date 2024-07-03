@@ -1,22 +1,25 @@
 <?php
-
 namespace Database\Seeders;
 
-use App\Models\Admin;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use App\Models\Admin;
 
 class AdminSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Admin::create([
-            'nom' => 'demba',
-            'email' => 'demba.ndiakhate@exemple.com',
-            'password' => Hash::make('Password@123'),
+        // Créez le rôle admin pour le guard admins
+        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'admins']);
+
+        // Créez un administrateur
+        $admin = Admin::create([
+            'nom' => 'Admin Name',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
         ]);
+
+        $admin->assignRole('admin');
     }
 }
+

@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,39 +9,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Organisme extends Authenticatable
 {
-
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'nom', 'description', 'logo', 'adresse', 'secteur_activite', 'ninea', 'date_creation',
+        'nom', 'description', 'logo', 'adresse', 'secteur_activite', 'ninea', 'date_creation', 'email', 'password',
     ];
-     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     public function evenements()
     {
         return $this->hasMany(Evenement::class);

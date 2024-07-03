@@ -16,14 +16,29 @@
             <a href="#" class="nav-link">Evenements</a>
             <a href="#" class="nav-link">A Propos</a>
         </div>
-        @if (Auth::check())
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-           class="button">Déconnexion</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-    @else
-        <a href="{{ route('login') }}" class="button">Connexion</a>
-    @endif
+
+        @if (Auth::guard('web')->check())
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+               class="button">Déconnexion</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @elseif (Auth::guard('organisme')->check())
+            <a href="{{ route('organisme.logout') }}"
+               onclick="event.preventDefault(); document.getElementById('organisme-logout-form').submit();"
+               class="button">Déconnexion</a>
+            <form id="organisme-logout-form" action="{{ route('organisme.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @elseif (Auth::guard('admins')->check())
+            <a href="{{ route('admin.logout') }}"
+               onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();"
+               class="button">Déconnexion</a>
+            <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="button">Connexion</a>
+        @endif
     </div>

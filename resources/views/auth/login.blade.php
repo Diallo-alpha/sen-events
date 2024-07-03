@@ -38,17 +38,7 @@
                             <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password" placeholder="Mot de passe">
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
-                        <!-- Remember Me -->
-                        {{-- <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
-                            <label class="form-check-label" for="remember_me">{{ __('Remember me') }}</label>
-                        </div> --}}
-                        {{-- <div class="form-group d-flex justify-content-between align-items-center">
-                            @if (Route::has('password.request'))
-                                <a class="text-sm" href="{{ route('password.request') }}">
-                                    {{ __('Forgot your password?') }}
-                                </a>
-                            @endif --}}
+
                             <button type="submit" class="btn btn-primary">Se connecter</button>
                         </div>
                     </form>

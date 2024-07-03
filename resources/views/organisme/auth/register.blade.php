@@ -1,52 +1,106 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer Société</title>
+    <link rel="stylesheet" href="{{ asset('css/organismeResgistre.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-page">
+        <div class="image-section">
+            <h1>Parlez-nous de votre <br> société</h1>
         </div>
+        <div class="form-section">
+            <div class="form-container">
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Error Messages -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('organisme.store-organisme') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" value="{{ old('nom') }}" required autofocus>
+                    @error('nom')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="ninea">Ninea</label>
+                    <input type="text" id="ninea" name="ninea" value="{{ old('ninea') }}" required>
+                    @error('ninea')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="logo">Logo</label>
+                    <input type="file" id="logo" name="logo">
+                    @error('logo')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="adresse">Adresse</label>
+                    <input type="text" id="adresse" name="adresse" value="{{ old('adresse') }}" required>
+                    @error('adresse')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="secteur">Secteur</label>
+                    <input type="text" id="secteur" name="secteur" value="{{ old('secteur') }}" required>
+                    @error('secteur')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" value="{{ old('date') }}" required>
+                    @error('date')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required>{{ old('description') }}</textarea>
+                    @error('description')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="motdepasse">Mot de passe</label>
+                    <input type="password" id="motdepasse" name="password" required>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <label for="password_confirmation">Confirmer le mot de passe</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                    @error('password_confirmation')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+
+                    <button type="submit">Créer</button>
+                </form>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</body>
+</html>
