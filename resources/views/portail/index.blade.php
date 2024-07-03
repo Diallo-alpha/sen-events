@@ -66,13 +66,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-4 a-propos">
-                    <h2 class="display-4">A propos de nous</h2>
+                    <h2 class="titre-section">A propos de nous</h2>
                 </div>
                 <div class="col-md-6">
                     <p class="lead">Bienvenue sur notre plateforme de gestion d'événements, votre partenaire de confiance pour organiser, planifier et réussir tous vos événements. Nous offrons des outils intuitifs et puissants pour simplifier chaque étape de la gestion d'événements, des inscriptions aux réservations en passant par la communication. Que vous organisiez une petite réunion ou une grande conférence, notre mission est de vous aider à créer des expériences inoubliables.</p>
                 </div>
                 <div class="col-md-6">
-                    <img src="images/a-propos.png" alt="Image de deux personnes s'aidant mutuellement à grimper une montagne" class="img-fluid rounded">
+                    <img src="{{ asset('images/a-propos.svg') }}" alt="Image de deux personnes s'aidant mutuellement à grimper une montagne" class="img-fluid rounded">
                 </div>
             </div>
         </div>
@@ -82,12 +82,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-4 a-propos">
-                    <h2 class="display-4">Événements</h2>
+                    <h2 class="titre-section">Événements</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'un microphone sur une estrade" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'un microphone sur une estrade" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'une foule de personnes regardant un concert" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'une foule de personnes regardant un concert" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">
@@ -115,7 +115,7 @@
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'une personne filmant un concert avec son téléphone" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'une personne filmant un concert avec son téléphone" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">
@@ -129,7 +129,7 @@
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'un ordinateur portable avec un calendrier ouvert" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'un ordinateur portable avec un calendrier ouvert" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'une illustration de deux personnes avec des chapeaux et des costumes colorés" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'une illustration de deux personnes avec des chapeaux et des costumes colorés" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="" alt="Image d'une illustration de plusieurs visages colorés" class="card-img-top">
+                            <img src="{{ asset('images/evenements1.svg') }}" alt="Image d'une illustration de plusieurs visages colorés" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Analyse de donnée</h5>
                                 <p class="card-text">

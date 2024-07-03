@@ -30,6 +30,7 @@ body {
     font-size: 24px;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
+    width: 200px;
 }
 
 .nav-links {
@@ -143,6 +144,17 @@ A pro
 }
 /*end propos*/
 /*card*/
+.titre-section {
+    margin-top: 7px;
+    text-align: start;
+    color: var(--Primaire, #007BFF);
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4.16px;
+}
 .card {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
