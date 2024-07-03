@@ -10,7 +10,15 @@
             <div class="my-3">
                 <h5>Date</h5> <br>
                 <P>28 juin 2024</P><br>
-                <button class="btn btn-primary">Reserver</button>
+                <a href="{{ route('reservations.create') }}" class="btn btn-primary">Reserver</a>
+
+                {{-- <span class="btn btn-primary">
+                <a http://'reservation/create'>Reserver</a>
+                </span>
+                @csrf
+                @method('post')
+                <button  type="submit" class="btn btn-primary">Reserver</button> --}}
+                {{-- <button class="btn btn-primary">Reserver</button> --}}
             </div>
             <div class="mt-4">
                 <h5>Description de l'événement :</h5>

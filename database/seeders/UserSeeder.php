@@ -1,37 +1,33 @@
 <?php
 
 namespace Database\Seeders;
-
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+// UserSeeder.php
 use Illuminate\Support\Str;
-use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        User::create([
-            'nom' => 'Diallo',
-            'prenom' => 'Alpha',
-            'email' => 'alphaloppe.diallo@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password123'),
-            'remember_token' => Str::random(10),
-        ]);
+        $users = [
+            [
+                'nom' => 'Ndiaye',
+                'prenom' => 'Alpha',
+                'email' => 'ndiaye@example.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'), // ou Hash::make
+                'remember_token' => Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // Ajoutez d'autres utilisateurs ici
+        ];
 
-        User::create([
-            'nom' => 'Diakhate',
-            'prenom' => 'demba',
-            'email' => 'dembaopacity.diakhater@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password123'),
-            'remember_token' => Str::random(10),
-        ]);
+        foreach ($users as $user) {
+            if (!DB::table('users')->where('email', $user['email'])->exists()) {
+                DB::table('users')->insert($user);
+            }
+        }
     }
 }

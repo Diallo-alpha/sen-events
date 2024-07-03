@@ -2,28 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\Organisme;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class OrganismeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        //
-        Organisme::create([
-            'nom' => 'simplon',
-            'email' => 'simplon.test@exemple.com',
-            'description' => 'ceci est un description',
-            'adresse' => 'sacré coeur 3 villa 1011',
-            'secteur_activite' => 'Formation professionnel',
-            'ninea' => '12345mlop',
-            'date_creation' => '2020-01-01',
-            'password' => Hash::make('simplon123'),
+        DB::table('organismes')->insert([
+            [
+                'nom' => 'Organisme A',
+                'email' => 'OrganismeA@exemple.com',
+                'adresse' => '123 Rue Principale',
+                'telephone' => '763456789',
+                'created_at' => now(),
+            ],
+            [
+                'nom' => 'Organisme B',
+                'email' => 'OrganismeB@exemple.com',
+                'adresse' => '456 Rue Secondaire',
+                'telephone' => '777654321',
+                'password' => 'azertyuiop',
+                'created_at' => now(),
+
+            ],
+            // Ajoutez d'autres organismes ici
         ]);
     }
 }

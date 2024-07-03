@@ -1,9 +1,9 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use App\Models\Admin;
 
 class AdminSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
 
         // Créez un administrateur
         $admin = Admin::create([
-            'nom' => 'Admin Name',
+            'name' => 'Admin Name',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
         ]);

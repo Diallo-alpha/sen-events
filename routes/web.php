@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrganismeController;
+use App\Http\Controllers\ReservationController;
 
 // Route::get('/', function()
 //     {
@@ -20,3 +21,10 @@ require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';
 require __DIR__.'/organisme.php';
 require __DIR__.'/evenement.php';
+
+
+
+Route::resource('reservations', ReservationController::class);
+
+
+
