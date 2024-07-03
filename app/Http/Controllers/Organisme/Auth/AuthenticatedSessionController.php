@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('organisme.dashboard', absolute: false));
+        return redirect()->route('organisme.dashboard');
     }
 
     /**
@@ -41,6 +41,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('organisme.login');
+        return redirect()->route('portail.index');
     }
 }

@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container-page">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Retour</a>
         <div class="image-section">
             <h1>Parlez-nous de votre <br> société</h1>
         </div>
@@ -97,10 +98,13 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    <button type="submit">Créer</button>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                    <a href="{{ route('login') }}" class="btn btn-info">Connexion</a>
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

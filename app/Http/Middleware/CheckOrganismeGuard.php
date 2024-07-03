@@ -24,7 +24,7 @@ class CheckOrganismeGuard
 
         // Vérifiez si l'utilisateur possède le garde "organisme"
         if (Auth::user()->guard !== 'organisme') {
-            return redirect()->route('home')->with('error', 'Vous n\'êtes pas autorisé à accéder à cette page.');
+            return redirect()->route('portail.index')->with('error', 'Vous n\'êtes pas autorisé à accéder à cette page.');
         }
 
         return $next($request);
