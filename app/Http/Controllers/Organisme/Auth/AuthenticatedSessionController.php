@@ -1,29 +1,34 @@
 <?php
 
 namespace App\Http\Controllers\Organisme\Auth;
-use Illuminate\View\View;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\OrganisationLoginRequest;
+use App\Models\Organisme;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Handle an incoming authentication request.
      */
-    public function create(): View
+    public function create()
     {
         return view('organisme.auth.login');
     }
-
-    /**
-     * Handle an incoming authentication request.
-     */
     public function store(OrganisationLoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+
+        // Récupérer l'organisme authentifié
+        $organisme = Auth::guard('organisme')->user();
+
+        // Stocker l'ID de l'organisme dans la session
+        if ($organisme) {
+            session(['organisme_id' => $organisme->id]);
+        }
 
         $request->session()->regenerate();
 
@@ -37,7 +42,8 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('organisme')->logout();
 
-        // $request->session()->invalidate();
+        // Supprimer l'ID de l'organisme de la session
+        $request->session()->forget('organisme_id');
 
         $request->session()->regenerateToken();
 

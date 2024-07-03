@@ -90,7 +90,7 @@
                     <img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="">
                 </div> --}}
             </div>
-            <div class="cardBox">
+            <div class="cardBox mt-13">
                @yield('cardBox')
             </div>
 

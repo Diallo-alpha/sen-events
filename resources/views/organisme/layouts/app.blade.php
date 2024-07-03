@@ -78,27 +78,7 @@
 
             <!-- ======================= Cards ================== -->
             <div class="cardBox mt-13">
-                <div class="card">
-                    <div>
-                        <div class="numbers">10000</div>
-                        <div class="cardName">Places Réservées</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">12</div>
-                        <div class="cardName">Evenements</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
+                @yield('cardBox')
             </div>
             <div class="content">
                 @yield('content')

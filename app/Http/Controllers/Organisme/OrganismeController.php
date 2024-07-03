@@ -1,28 +1,53 @@
 <?php
 
 namespace App\Http\Controllers\Organisme;
+
+use App\Models\Evenement;
 use App\Models\Organisme;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrganismeController extends Controller
 {
-    //view dashboard organisme
-    public function index()
+    private function getOrganismeCounters()
     {
-       return view('organisme.dashboard');
+        $organismeId = Auth::id();
+        $evenementsCount = Evenement::where('organisme_id', $organismeId)->count();
+        $reservationsCount = Reservation::whereHas('evenement', function ($query) use ($organismeId) {
+            $query->where('organisme_id', $organismeId);
+        })->count();
+
+        return [$evenementsCount, $reservationsCount];
     }
 
-    //view inscrit organisme
-    public function inscrit ()
-        {
-            return view('organisme.inscrit');
-        }
-    //view evenements
-    public function evenements ()
-        {
-            return view('organisme.evenement');
-        }
+    // View dashboard organisme
+    public function index()
+    {
+        $organisme = Auth::user()->organisme;
+        list($evenementsCount, $reservationsCount) = $this->getOrganismeCounters();
+        return view('organisme.dashboard', compact('organisme','evenementsCount', 'reservationsCount'));
+    }
+
+    // View inscrit organisme
+    public function inscrit()
+    {
+        $organismeId = Auth::id();
+        $evenements = Evenement::where('organisme_id', $organismeId)->with('reservations.user')->get();
+        list($evenementsCount, $reservationsCount) = $this->getOrganismeCounters();
+        return view('organisme.inscrit', compact('evenements', 'evenementsCount', 'reservationsCount'));
+    }
+
+    // View evenements
+    public function evenements()
+    {
+        $organismeId = Auth::id();
+        $evenements = Evenement::where('organisme_id', $organismeId)->get();
+        list($evenementsCount, $reservationsCount) = $this->getOrganismeCounters();
+        return view('organisme.evenement', compact('evenements', 'evenementsCount', 'reservationsCount'));
+    }
+
     public function create()
     {
         return view('organisme.create');
