@@ -50,7 +50,7 @@ body {
    width:685px;;
 }
 .right-side {
-    width: 55%;
+    width: 50%;
     display: flex;
     align-items: flex-start;
     align-content: flex-start;
@@ -127,7 +127,7 @@ textarea{
     border: 0.5px solid var(--GRis-fonc, #343A40);
     background: var(--grirs-claire, #F8F9FA);
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-    width: 80vh;
+    width: 75vh;
 }
 .btn-info{
     width: 35%;
