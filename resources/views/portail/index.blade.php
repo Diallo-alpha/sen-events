@@ -55,7 +55,7 @@
                     @if (Auth::guard('organisme')->check())
                         <a href="{{ route('evenement.create') }}" class="buttonEv">Créer un évènement</a>
                     @else
-                        <a href="{{ route('organisme.register-organisme') }}" class="buttonEv">Créer un évènements</a>
+                        <a href="{{ route('organisme.register') }}" class="buttonEv">Créer un évènements</a>
                     @endif
                 </div>
             </div>

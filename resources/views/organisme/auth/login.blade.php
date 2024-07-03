@@ -52,7 +52,7 @@
                             <button type="submit" class="btn btn-primary">Se connecter</button>
                         </div>
                     </form>
-                    <a href="{{ route('register') }}"><span>S'INSCRIRE</span></a>
+                    <a href="{{ route('organisme.register') }}"><span>S'INSCRIRE</span></a>
                 </div>
             </div>
         </div>
