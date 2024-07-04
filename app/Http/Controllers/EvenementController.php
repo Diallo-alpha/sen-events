@@ -39,19 +39,14 @@ class EvenementController extends Controller
 //     }
 //     return view('reservations.create', compact('evenement'));
 // }
-public function create($id)
+
+public function create()
 {
-    $evenement = Evenement::find($id);
-    if (!$evenement) {
-        return redirect()->back()->with('error', 'Event not found');
-    }
-    return view('reservations.create', compact('evenement'));
+    return view('evenements.create');
 }
 
-    // public function create()
-    // {
-    //     return view('evenements.create');
-    // }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -81,7 +76,7 @@ public function create($id)
             'organisme_id' => auth()->user()->id,
         ]);
 
-        return redirect()->route('evenement.index')->with('success', 'Événement créé avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement créé avec succès');
     }
 
     /**
@@ -90,7 +85,7 @@ public function create($id)
     public function show($id)
     {
         $evenement = Evenement::findOrFail($id);
-        return view('evenements.show', compact('evenement'));
+        return view('evenements.edit', compact('evenement'));
     }
 
     /**
@@ -135,7 +130,7 @@ public function create($id)
             'photo' => $photoPath,
         ]);
 
-        return redirect()->route('evenement.index')->with('success', 'Événement mis à jour avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement mis à jour avec succès');
     }
 
     /**
@@ -146,6 +141,6 @@ public function create($id)
         $evenement = Evenement::findOrFail($id);
         $evenement->delete();
 
-        return redirect()->route('evenement.index')->with('success', 'Événement supprimé avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement supprimé avec succès');
     }
 }

@@ -14,11 +14,19 @@ class ReservationController extends Controller
         return view('reservations.index', compact('reservations'));
     }
 
-    public function create(Request $request)
-    {
-        $evenement = Evenement::find($request->evenement_id);
-        return view('reservations.create', compact('evenement'));
+    // public function create(Request $request)
+    // {
+    //     $evenement = Evenement::find($request->evenement_id);
+    //     return view('reservations.create', compact('evenement'));
+    // }
+    public function create($id)
+{
+    $evenement = Evenement::find($id);
+    if (!$evenement) {
+        return redirect()->back()->with('error', 'Event not found');
     }
+    return view('reservations.create', compact('evenement'));
+}
 
     public function store(Request $request)
     {

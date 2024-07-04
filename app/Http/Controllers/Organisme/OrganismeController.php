@@ -50,7 +50,7 @@ class OrganismeController extends Controller
 
     public function create()
     {
-        return view('organisme.create');
+        return view('evenements.create');
     }
 
     public function store(Request $request)
