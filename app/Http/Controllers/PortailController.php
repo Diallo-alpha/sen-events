@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use Illuminate\Http\Request;
 
 class PortailController extends Controller
@@ -12,7 +13,8 @@ class PortailController extends Controller
     public function index()
     {
         //
-        return view('portail.index');
+        $evenements = Evenement::all();
+        return view('portail.index', compact('evenements'));
     }
 
     /**
