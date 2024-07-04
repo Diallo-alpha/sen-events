@@ -5,45 +5,53 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Mail\ReservationCreated;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::where('user_id', auth()->id())->get();
         return view('reservations.index', compact('reservations'));
     }
 
-    // public function create(Request $request)
-    // {
-    //     $evenement = Evenement::find($request->evenement_id);
-    //     return view('reservations.create', compact('evenement'));
-    // }
     public function create($id)
-{
-    $evenement = Evenement::find($id);
-    if (!$evenement) {
-        return redirect()->back()->with('error', 'Event not found');
+    {
+        $evenement = Evenement::find($id);
+        if (!$evenement) {
+            return redirect()->back()->with('error', 'Événement non trouvé');
+        }
+        return view('portail.index', compact('evenement'));
     }
-    return view('reservations.create', compact('evenement'));
-}
 
     public function store(Request $request)
     {
         $request->validate([
             'evenement_id' => 'required',
             'user_id' => 'required',
-            'statut' => 'required',
         ]);
 
-        Reservation::create($request->all());
-        return redirect()->route('reservations.index')
+        // Définir la valeur par défaut pour 'statut'
+        $reservationData = $request->all();
+        $reservationData['statut'] = $reservationData['statut'] ?? 'accepter';
+
+        $reservation = Reservation::create($reservationData);
+
+        // Envoyer un email de confirmation
+        // Mail::to(auth()->user()->email)->send(new ReservationCreated($reservation));
+
+        return redirect()->route('portail.index')
                          ->with('success', 'Réservation créée avec succès.');
     }
 
-    public function show(Reservation $reservation)
+    public function show($id)
     {
-        return view('reservations.show', compact('reservation'));
+        $evenement = Evenement::find($id);
+        if (!$evenement) {
+            return redirect()->back()->with('error', 'Événement non trouvé');
+        }
+        return view('portail.detailsEvents', compact('evenement'));
     }
 
     public function edit(Reservation $reservation)

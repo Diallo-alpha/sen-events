@@ -79,6 +79,27 @@ public function create()
         return redirect()->route('organisme.evenements')->with('success', 'Événement créé avec succès');
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $evenement = Evenement::findOrFail($id);
+        return view('evenements.edit', compact('evenement'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $evenement = Evenement::findOrFail($id);
+        return view('evenements.edit', compact('evenement'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         $request->validate([

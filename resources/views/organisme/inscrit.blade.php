@@ -49,11 +49,11 @@
                         @foreach($evenement->reservations as $reservation)
                             <tr>
                                 <td>{{ $evenement->nom }}</td>
-                                <td>{{ $reservation->user->name }}</td>
+                                <td>{{ $reservation->user->nom }}</td>
                                 <td>{{ $reservation->user->email }}</td>
                                 <td>{{ $reservation->created_at }}</td>
                                     <!-- Form pour accepter ou refuser la réservation -->
-                                    <form action="{{ route('reservation.accept', $reservation->id) }}" method="POST" style="display: inline-block;">
+                                    {{-- <form action="{{ route('reservation.accept', $reservation->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-success">Accepter</button>
@@ -62,7 +62,7 @@
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-danger">Refuser</button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach
