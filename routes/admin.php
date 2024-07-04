@@ -26,9 +26,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
         Route::delete('/utilisateurs/{id}', [AdminController::class, 'deleteUser'])->name('utilisateurs.delete');
         Route::delete('/associations/{id}', [AdminController::class, 'deleteAssociation'])->name('associations.delete');
+        Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
+        Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
+        Route::post('roles/assignRoleToUser', [RoleController::class, 'assignRoleToUser'])->name('roles.assignRoleToUser');
+        Route::post('roles/assignPermission/{role}', [RoleController::class, 'assignPermission'])->name('roles.assignPermission');
+        Route::delete('roles/destroy/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
     });
-    // Route::middleware(['auth:admins', 'role:admin'])->group(function () {
 
     });
 // });

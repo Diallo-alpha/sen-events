@@ -1,7 +1,7 @@
 <x-admin-app-layout>
     @section('content')
         <div class="container">
-            <h1>Create Role</h1>
+            <h1>Créer un rôle</h1>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -16,19 +16,38 @@
             <form action="{{ route('admin.roles.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Role Name</label>
+                    <label for="name">Nom du Rôle</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="guard_name">Guard Name</label>
-                    <input type="text" class="form-control" id="guard_name" name="guard_name" required>
+                    <label for="guard_name">Nom du Guard</label>
+                    <select class="form-control" id="guard_name" name="guard_name" required>
+                        <option value="web">Web</option>
+                        <option value="admins">Admins</option>
+                        <option value="organisme">Organisme</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create Role</button>
-            </form>
+                <div class="form-group">
+                    <label for="permissions">Permissions</label>
+                    <div class="checkbox-group">
+                        @foreach ($permissions as $permission)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="permission_{{ $permission->id }}">
+                                <label class="form-check-label" for="permission_{{ $permission->id }}">
+                                    {{ $permission->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
 
-            <h1>Roles and Permissions</h1>
+                <button type="submit" class="btn btn-primary">Créer le Rôle</button>
+            </form>
+            <br>
+            <br>
+            <h1>Assigner des Rôles aux Utilisateurs</h1>
 
             @if (session('success'))
                 <div class="alert alert-success">
@@ -36,10 +55,40 @@
                 </div>
             @endif
 
+            <form action="{{ route('admin.roles.assignRoleToUser') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="user">Choisir un Utilisateur</label>
+                    <select class="form-control" id="user" name="user_id" required>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="roles">Assigner des Rôles</label>
+                    <div class="checkbox-group">
+                        @foreach ($roles as $role)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->name }}" id="role_{{ $role->id }}">
+                                <label class="form-check-label" for="role_{{ $role->id }}">
+                                    {{ $role->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Assigner les Rôles</button>
+            </form>
+
+            <h1>Rôles et Permissions</h1>
+
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Role</th>
+                        <th>Rôle</th>
                         <th>Permissions</th>
                         <th>Actions</th>
                     </tr>
@@ -57,19 +106,24 @@
                                 <form action="{{ route('admin.roles.assignPermission', $role) }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="permission">Add Permission</label>
-                                        <select name="permission" class="form-control" required>
+                                        <label for="permission">Ajouter des Permissions</label>
+                                        <div class="checkbox-group">
                                             @foreach ($permissions as $permission)
-                                                <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="permission_{{ $permission->id }}">
+                                                    <label class="form-check-label" for="permission_{{ $permission->id }}">
+                                                        {{ $permission->name }}
+                                                    </label>
+                                                </div>
                                             @endforeach
-                                        </select>
+                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Assign Permission</button>
+                                    <button type="submit" class="btn btn-primary">Assigner les Permissions</button>
                                 </form>
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
                             </td>
                         </tr>

@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +13,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(AdminSeeder::class);
-        $this->call(OrganismeSeeder::class);  
+        $this->call(OrganismeSeeder::class);
+        $this->call(PermissionSeeder::class);
     }
 }
