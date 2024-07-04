@@ -57,7 +57,7 @@ class EvenementController extends Controller
             'organisme_id' => auth()->user()->id,
         ]);
 
-        return redirect()->route('evenement.index')->with('success', 'Événement créé avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement créé avec succès');
     }
 
     /**
@@ -66,7 +66,7 @@ class EvenementController extends Controller
     public function show($id)
     {
         $evenement = Evenement::findOrFail($id);
-        return view('evenements.show', compact('evenement'));
+        return view('evenements.edit', compact('evenement'));
     }
 
     /**
@@ -111,7 +111,7 @@ class EvenementController extends Controller
             'photo' => $photoPath,
         ]);
 
-        return redirect()->route('evenement.index')->with('success', 'Événement mis à jour avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement mis à jour avec succès');
     }
 
     /**
@@ -122,6 +122,6 @@ class EvenementController extends Controller
         $evenement = Evenement::findOrFail($id);
         $evenement->delete();
 
-        return redirect()->route('evenement.index')->with('success', 'Événement supprimé avec succès');
+        return redirect()->route('organisme.evenements')->with('success', 'Événement supprimé avec succès');
     }
 }
