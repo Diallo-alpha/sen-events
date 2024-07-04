@@ -21,6 +21,6 @@ Route::middleware('guest:web')->group(function () {
 
 Route::middleware('auth:web')->group(function () {
 
-    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 });
