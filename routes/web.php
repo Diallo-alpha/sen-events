@@ -33,7 +33,14 @@ require __DIR__.'/evenement.php';
 Route::get('/evenement/{id}', [EvenementController::class, 'show'])->name('evenement.show');
 
 
-// Route::middleware(['auth'])->group(function () {
     Route::resource('evenements', EvenementController::class);
     Route::resource('reservations', ReservationController::class);
-// });
+
+
+    Route::put('/test-email/{id}',[ReservationController::class, 'refuserReservation'])->name('mail');
+
+
+// Routes pour les idées
+// Route::resource('reservations', ReservationController::class);
+// Route::post('reservations/{id}/approuvé', [ReservationController::class, 'approveReservations'])->name('reservations.approuvé');
+// Route::post('reservations/{id}/refusé', [ReservationController::class, 'rejectReservations'])->name('reservations.refusé');

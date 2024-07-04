@@ -14,6 +14,8 @@
             <tr>
                 <th>Evenement</th>
                 <th>Statut</th>
+                <th>Accepter</th>
+                <th>Modifier</th>
                 <th>Actions</th>
             </tr>
             @foreach ($reservations as $reservation)

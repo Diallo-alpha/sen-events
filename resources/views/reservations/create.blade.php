@@ -17,10 +17,10 @@
                 <label for="status">Status :</label>
                 <select class="form-control" id="status" name="status" required>
                     @if(auth()->user()->role == 'association' || auth()->user()->role == 'admin')
-                        <option value="approuvé">Approuvé</option>
+
                         <option value="refusé">Refusé</option>
                     @else
-                        <option value="nouveau">Nouveau</option>
+                         <option value="approuvé">Approuvé</option>
                     @endif
                 </select>
             </div>

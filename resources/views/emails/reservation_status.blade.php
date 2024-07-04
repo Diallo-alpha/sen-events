@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Bonjour, {{ $reservation->auteur_nom_complet }}</h1>
-    <p>Votre résérvation intitulée "{{ $reservation->libelle }}" a été {{ $status }}.</p>
+    <p>Votre résérvation intitulée "{{ $reservation->nom }}" a été {{ $statut }}.</p>
 </body>
 </html>
 

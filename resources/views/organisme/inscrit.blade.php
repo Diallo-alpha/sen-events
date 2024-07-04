@@ -52,18 +52,32 @@
                                 <td>{{ $reservation->user->nom }}</td>
                                 <td>{{ $reservation->user->email }}</td>
                                 <td>{{ $reservation->created_at }}</td>
-                                    <!-- Form pour accepter ou refuser la réservation -->
-                                    {{-- <form action="{{ route('reservation.accept', $reservation->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-success">Accepter</button>
-                                    </form>
-                                    <form action="{{ route('reservation.refuse', $reservation->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-danger">Refuser</button>
-                                    </form> --}}
-                                </td>
+                            <td>
+                                 {{-- <form action="{{ route('organisme.', $reservation->id) }}" method="POST" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">refuser</button>
+                                </form>
+
+
+                                <form action="{{ route('organisme.', $reservation->id) }}" method="POST" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">modiffier</button>
+                                </form> --}}
+
+
+
+                                    <td>
+                                        <a href="{{ route('test-email', $reservation->id) }}" class="btn btn-info">Approuver</a>
+                                        {{-- <a href="{{ route('evenement.edit', $reservation->id) }}" class="btn btn-primary">Edit</a> --}}
+                                        <form action="{{ route('test-email', $reservation->id) }}" method="POST" style="display:inline">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" class="btn btn-danger">Refuser</button>
+                                        </form>
+                                    </td>
+                            </td>
                             </tr>
                         @endforeach
                     @endforeach
@@ -73,3 +87,10 @@
     @endsection
 
 </x-organisme-app-layout>
+
+
+ {{-- @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button> --}}
+
+
