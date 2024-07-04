@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
@@ -9,23 +10,21 @@ class ReservationController extends Controller
 {
     public function index()
     {
-    
         $reservations = Reservation::all();
-
         return view('reservations.index', compact('reservations'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $evenements = Evenement::all();
-        return view('reservations.create' ,  compact('evenements'));
+        $evenement = Evenement::find($request->evenement_id);
+        return view('reservations.create', compact('evenement'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'evenement' => 'required',
-            'user' => 'required',
+            'evenement_id' => 'required',
+            'user_id' => 'required',
             'statut' => 'required',
         ]);
 

@@ -24,10 +24,34 @@ class EvenementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('evenements.create');
+
+//      public function create()
+// {
+//     $evenement = Evenement::find($id); // Fetch the event you need
+//     return view('reservations.create', compact('evenement'));
+// }
+
+// public function create()
+// {
+//     $evenement = Evenement::find($id); // Replace $id with the actual ID or route parameter
+//     if (!$evenement) {
+//         return redirect()->back()->with('error', 'Event not found');
+//     }
+//     return view('reservations.create', compact('evenement'));
+// }
+public function create($id)
+{
+    $evenement = Evenement::find($id);
+    if (!$evenement) {
+        return redirect()->back()->with('error', 'Event not found');
     }
+    return view('reservations.create', compact('evenement'));
+}
+
+    // public function create()
+    // {
+    //     return view('evenements.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
