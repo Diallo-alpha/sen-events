@@ -43,22 +43,44 @@
         @endif
     </div>
     <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div>
-                    <h1><span class="gradient-text">SEN</span><br><span class="gradient-text">EVENTS</span></h1>
+        <div id="heroCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#heroCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#heroCarousel" data-slide-to="1"></li>
+                <li data-target="#heroCarousel" data-slide-to="2"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('images/slide05.svg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Organisez vos événements</h5>
+                        <p>Avec simplicité et efficacité</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-hero">Organisez et Gérez Vos Événements en Toute <br> Simplicité</p>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/slide02.svg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Des outils puissants</h5>
+                        <p>Pour tous vos besoins</p>
+                    </div>
                 </div>
-                <div>
-                    @if (Auth::guard('organisme')->check())
-                        <a href="{{ route('evenement.create') }}" class="buttonEv">Créer un événement</a>
-                    @else
-                        <a href="{{ route('organisme.register') }}" class="buttonEv">Créer un événement</a>
-                    @endif
+                <div class="carousel-item">
+                    <img src="{{ asset('images/slide01.svg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Créez des expériences mémorables</h5>
+                        <p>Avec notre plateforme</p>
+                    </div>
                 </div>
             </div>
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Précédent</span>
+            </a>
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Suivant</span>
+            </a>
         </div>
     </section>
 
