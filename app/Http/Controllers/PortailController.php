@@ -20,10 +20,10 @@ class PortailController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function details()
+    public function details($id)
     {
-        //
-        return view('portail.detailsEvents');
+        $evenement = Evenement::find ($id);
+        return view('portail.detailsEvents',compact('evenement')) ;
     }
 
     /**
