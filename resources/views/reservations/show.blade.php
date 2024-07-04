@@ -8,8 +8,8 @@
                 <h2>{{ $reservation->id }}</h2>
             </div>
             <div class="card-body">
-                <p><strong>Evenement ID:</strong> {{ $reservation->evenement_id }}</p>
-                <p><strong>User ID:</strong> {{ $reservation->user_id }}</p>
+                <p><strong>Evenement:</strong> {{ $reservation->evenement_id }}</p>
+                <p><strong>User:</strong> {{ $reservation->user_id }}</p>
                 <p><strong>Statut:</strong> {{ $reservation->statut }}</p>
             </div>
         </div>

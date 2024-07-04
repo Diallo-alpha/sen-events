@@ -14,17 +14,23 @@
 
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <div class="form-group">
-                <label for="statut">Statut :</label>
-                <select name="statut" class="form-control">
-                    @if(auth()->user()->role == 'admin')
-                        <option value="pending">En attente</option>
-                        <option value="confirmed">Confirmé</option>
+                <label for="status">Status :</label>
+                <select class="form-control" id="status" name="status" required>
+
+                            @if(auth()->user()->role == 'association, admin')
+                            @auth
+                                <option value="approuvé">Approuvé</option>
+                                <option value="refusé">Refusé</option>
+                            @endauth
                     @else
-                        <option value="pending">En attente</option>
-                    @endif
+                    <option value="nouveau">Nouveau</option>
+                   @endif
                 </select>
             </div>
+
             <button type="submit" class="btn btn-primary">Réserver</button>
         </form>
     </div>
 @endsection
+
+

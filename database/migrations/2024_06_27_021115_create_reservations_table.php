@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evenement_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('statut');
+            $table->enum('status', ['approuvé', 'refuser', 'Nouveau'])->default('Nouveau');
             $table->timestamps();
         });
     }
