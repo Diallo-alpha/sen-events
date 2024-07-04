@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-// use App\Http\Controllers\Organisme\Auth\RegisteredUserController;
-
+use App\Http\Controllers\ReservationController;
 Route::middleware('guest:web')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
@@ -23,4 +22,5 @@ Route::middleware('auth:web')->group(function () {
 
  Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
+Route::resource('reservations', ReservationController::class);
 });
