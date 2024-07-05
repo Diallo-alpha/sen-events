@@ -26,7 +26,7 @@ a {
 
 .left-section {
     flex: 1;
-    background-image: url("../images/event-back.svg") no-repeat center center;
+    background: url("../images/event-back.svg") no-repeat center center;
     background-size: cover;
     position: relative;
     display: flex;
@@ -129,4 +129,9 @@ label {
     letter-spacing: 3.16px;
     text-align: center;
     margin-left: -10vh;
+}
+@media (max-width: 768px) {
+    .left-section, .right-section {
+        flex: 100%;
+    }
 }

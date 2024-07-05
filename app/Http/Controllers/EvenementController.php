@@ -18,7 +18,7 @@ class EvenementController extends Controller
     public function index()
     {
         $evenements = Evenement::all();
-        return view('evenements.index', compact('evenements'));
+        return view('portail.index', compact('evenements'));
     }
 
     /**

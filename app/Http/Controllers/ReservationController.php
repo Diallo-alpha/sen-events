@@ -7,17 +7,20 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Mail\ReservationCreated;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
     public function index()
     {
+        // Récupérer toutes les réservations de l'utilisateur connecté
         $reservations = Reservation::where('user_id', auth()->id())->get();
         return view('reservations.index', compact('reservations'));
     }
 
     public function create($id)
     {
+        // Trouver l'événement par son ID
         $evenement = Evenement::find($id);
         if (!$evenement) {
             return redirect()->back()->with('error', 'Événement non trouvé');
@@ -27,26 +30,42 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
+        // Valider les données du formulaire
         $request->validate([
-            'evenement_id' => 'required',
-            'user_id' => 'required',
+            'evenement_id' => 'required|exists:evenements,id',
+            'user_id' => 'required|exists:users,id',
         ]);
 
-        // Définir la valeur par défaut pour 'statut'
-        $reservationData = $request->all();
-        $reservationData['statut'] = $reservationData['statut'] ?? 'accepter';
+        // Trouver l'événement correspondant
+        $evenement = Evenement::findOrFail($request->evenement_id);
 
-        $reservation = Reservation::create($reservationData);
+        // Vérifier si la date limite est dépassée
+        if (Carbon::now()->gt($evenement->date_limite)) {
+            return back()->with('error', 'La date limite pour les réservations de cet événement est dépassée.');
+        }
 
-        // Envoyer un email de confirmation
-        // Mail::to(auth()->user()->email)->send(new ReservationCreated($reservation));
+        // Vérifier s'il reste des places disponibles
+        $reservationsCount = Reservation::where('evenement_id', $evenement->id)->count();
+        if ($reservationsCount >= $evenement->places_disponible) {
+            return back()->with('error', 'Désolé, il n\'y a plus de places disponibles pour cet événement.');
+        }
 
-        return redirect()->route('portail.index')
-                         ->with('success', 'Réservation créée avec succès.');
+        // Créer la réservation
+        $reservation = new Reservation();
+        $reservation->evenement_id = $evenement->id;
+        $reservation->user_id = $request->user_id;
+        $reservation->statut = 'accepter'; // Par défaut, à ajuster selon ta logique
+        $reservation->save();
+
+        // Envoi d'un email de confirmation (exemple)
+        // Mail::to($reservation->user->email)->send(new ReservationCreated($reservation));
+
+        return redirect()->route('portail.index')->with('success', 'Réservation créée avec succès.');
     }
 
     public function show($id)
     {
+        // Trouver l'événement par son ID
         $evenement = Evenement::find($id);
         if (!$evenement) {
             return redirect()->back()->with('error', 'Événement non trouvé');
@@ -61,21 +80,22 @@ class ReservationController extends Controller
 
     public function update(Request $request, Reservation $reservation)
     {
+        // Valider les données du formulaire
         $request->validate([
-            'evenement_id' => 'required',
-            'user_id' => 'required',
-            'statut' => 'required',
+            'evenement_id' => 'required|exists:evenements,id',
+            'user_id' => 'required|exists:users,id',
+            'statut' => 'required|string',
         ]);
 
+        // Mettre à jour la réservation
         $reservation->update($request->all());
-        return redirect()->route('reservations.index')
-                         ->with('success', 'Réservation mise à jour avec succès.');
+        return redirect()->route('reservations.index')->with('success', 'Réservation mise à jour avec succès.');
     }
 
     public function destroy(Reservation $reservation)
     {
+        // Supprimer la réservation
         $reservation->delete();
-        return redirect()->route('reservations.index')
-                         ->with('success', 'Réservation supprimée avec succès.');
+        return redirect()->route('reservations.index')->with('success', 'Réservation supprimée avec succès.');
     }
 }
