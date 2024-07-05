@@ -110,21 +110,24 @@
                     <h2 class="titre-section">Événements</h2>
                 </div>
                 @foreach($evenements as $evenement)
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="{{ asset('public/'.$evenement->photo) }}" alt="Image de l'événement" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $evenement->nom }}</h5>
-                                <p class="card-text">
-                                    <span class="text-danger">{{ $evenement->date_evenement }}</span><br>
-                                    <span class="text-primary"><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</span><br>
-                                    {{ Str::limit($evenement->description, 100) }}
-                                </p>
-                                <a href="{{ route('details.events', $evenement->id) }}" class="btn btn-primary">Voir plus</a>
-                            </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('public/'.$evenement->photo) }}" alt="Image de l'événement" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $evenement->nom }}</h5>
+                            <p class="card-text">
+                                <span class="text-danger">{{ $evenement->date_evenement }}</span><br>
+                                <span class="text-primary"><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</span><br>
+                                {{ Str::limit($evenement->description, 100) }}
+                                <br>
+                               Places disponibles <strong> : {{ $evenement->places_disponible }}</strong><br>
+                               Organisé par : <strong>{{ $evenement->organisme->nom }}</strong>
+                            </p>
+                            <a href="{{ route('details.events', $evenement->id) }}" class="btn btn-primary">Voir plus</a>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
             </div>
         </div>
     </section>

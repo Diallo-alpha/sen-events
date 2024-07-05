@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Mail\ReservationCreated;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -25,21 +26,38 @@ class ReservationController extends Controller
         return view('portail.index', compact('evenement'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'evenement_id' => 'required',
-            'user_id' => 'required',
-        ]);
+        public function store(Request $request)
+        {
+            $request->validate([
+                'evenement_id' => 'required',
+                'user_id' => 'required',
+            ]);
 
-        $reservation = new Reservation();
-        $reservation->evenement_id = $request->evenement_id;
-        $reservation->user_id = $request->user_id;
-        $reservation->statut = 'accepter';
-        $reservation->save();
+            $evenement = Evenement::findOrFail($request->evenement_id);
 
-        return redirect()->route('portail.index')->with('success', 'Réservation créée avec succès.');
-    }
+            // Vérifier si la date limite est dépassée
+            if (Carbon::now()->gt($evenement->date_limite)) {
+                return back()->with('error', 'La date limite pour les réservations de cet événement est dépassée.');
+            }
+
+            // Vérifier s'il reste des places disponibles
+            $reservationsCount = Reservation::where('evenement_id', $evenement->id)->count();
+            if ($reservationsCount >= $evenement->places_disponible) {
+                return back()->with('error', 'Désolé, il n\'y a plus de places disponibles pour cet événement.');
+            }
+
+            // Créer la réservation
+            $reservation = new Reservation();
+            $reservation->evenement_id = $evenement->id;
+            $reservation->user_id = $request->user_id;
+            $reservation->statut = 'accepter'; // Par défaut, à ajuster selon ta logique
+            $reservation->save();
+
+            // Envoi d'un email de confirmation (exemple)
+            // Mail::to($reservation->user->email)->send(new ReservationCreated($reservation));
+
+            return redirect()->route('portail.index')->with('success', 'Réservation créée avec succès.');
+        }
 
     public function show($id)
     {
