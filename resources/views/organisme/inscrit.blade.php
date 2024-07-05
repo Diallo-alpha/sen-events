@@ -32,41 +32,54 @@
     @section('content')
     <div class="container">
         <h1>Liste des inscrits pour {{ $evenement->nom }}</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nom de l'événement</th>
-                    <th>Nom de l'utilisateur</th>
-                    <th>Email</th>
-                    <th>Date d'inscription</th>
-                    <th>Accepter</th>
-                    <th>Modifier</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($reservations as $reservation)
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <br>
+                <br>
+                <p><strong>Places restantes :</strong> {{ $placesRestantes }}</p>
+                <br>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
                     <tr>
-                        <td>{{ $evenement->nom }}</td>
-                        <td>{{ $reservation->user->nom }}</td>
-                        <td>{{ $reservation->user->email }}</td>
-                        <td>{{ $reservation->created_at }}</td>
-                        <td>
-                            <!-- Form pour accepter ou refuser la réservation -->
-                            {{-- <form action="{{ route('reservation.accept', $reservation->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn btn-success">Accepter</button>
-                            </form>
-                            <form action="{{ route('reservation.refuse', $reservation->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn btn-danger">Refuser</button>
-                            </form> --}}
-                        </td>
+                        <th scope="col">Nom de l'événement</th>
+                        <th scope="col">Nom de l'utilisateur</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Date d'inscription</th>
+                        <th scope="col">Validation</th>
+                        <th scope="col">Annulation</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($reservations as $reservation)
+                        <tr>
+                            <td>{{ $evenement->nom }}</td>
+                            <td>{{ $reservation->user->nom }}</td>
+                            <td>{{ $reservation->user->email }}</td>
+                            <td>{{ $reservation->created_at }}</td>
+                            {{-- <td>
+                                <!-- Form pour accepter la réservation -->
+                                <form action="{{ route('reservation.accept', $reservation->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-success">Accepter</button>
+                                </form>
+                            </td>
+                            <td>
+                                <!-- Form pour refuser la réservation -->
+                                <form action="{{ route('reservation.refuse', $reservation->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-danger">Refuser</button>
+                                </form>
+                            </td> --}}
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 </x-organisme-app-layout>

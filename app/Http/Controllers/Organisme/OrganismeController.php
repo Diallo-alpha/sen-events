@@ -31,17 +31,35 @@ class OrganismeController extends Controller
     }
 
     // View inscrit organisme
-    public function inscrit($evenementId)
-    {
-        $organismeId = Auth::id();
-        $evenement = Evenement::where('organisme_id', $organismeId)->findOrFail($evenementId);
+// View inscrit organisme
+// View inscrit organisme
+public function inscrit($evenementId)
+{
+    $evenement = Evenement::findOrFail($evenementId);
+    $organismeId = Auth::id();
 
-        $reservations = $evenement->reservations()->with('user')->get();
+    // Récupérer les réservations pour cet événement avec les utilisateurs associés
+    $reservations = Reservation::where('evenement_id', $evenementId)->with('user')->get();
 
-        list($evenementsCount, $reservationsCount) = $this->getOrganismeCounters();
+    // Calculer le nombre de réservations pour cet événement
+    $reservationsCount = $reservations->count();
 
-        return view('organisme.inscrit', compact('evenement', 'reservations', 'evenementsCount', 'reservationsCount'));
-    }
+    // Calculer le nombre de places restantes
+    $placesRestantes = $evenement->places_disponible - $reservationsCount;
+
+    // Récupérer le nombre total d'événements pour l'organisme
+    $evenementsCount = Evenement::where('organisme_id', $organismeId)->count();
+
+    return view('organisme.inscrit', [
+        'evenement' => $evenement,
+        'reservations' => $reservations,
+        'placesRestantes' => $placesRestantes,
+        'reservationsCount' => $reservationsCount,
+        'evenementsCount' => $evenementsCount,
+    ]);
+}
+
+
 
 
     // View evenements

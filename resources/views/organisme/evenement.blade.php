@@ -30,22 +30,24 @@
 
     @endsection
 
-    @section('content')
-        <div class="container">
-            <h1>Mes Événements</h1>
-            <a href="{{ route('evenement.create') }}" class="btn btn-primary">Créer un événement</a>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Lieu</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($evenements as $evenement)
+
+@section('content')
+<div class="container">
+    <h1>Liste des événements</h1>
+    <a href="{{ route('evenement.create') }}" class="btn btn-primary">Créer un événement</a>
+    <div class="table-responsive">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Lieu</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($evenements as $evenement)
                     <tr>
                         <td>{{ $evenement->nom }}</td>
                         <td>{{ $evenement->description }}</td>
@@ -53,18 +55,18 @@
                         <td>{{ $evenement->lieu }}</td>
                         <td>
                             <a href="{{ route('evenement.update', $evenement->id) }}" class="btn btn-warning">Modifier</a>
-                            <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>
-                            <a href="{{ route('organisme.inscrit', $evenement->id) }}" class="btn btn-info">Voir les réservations</a>
+                            <a href="{{ route('organisme.inscrit', ['evenementId' => $evenement->id]) }}" class="btn btn-info">Inscrits</a>
                         </td>
                     </tr>
                 @endforeach
-
-                </tbody>
-            </table>
-        </div>
-    @endsection
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
 </x-organisme-app-layout>
