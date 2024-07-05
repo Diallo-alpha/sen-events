@@ -298,3 +298,22 @@ footer p {
         height: auto;
     }
 }
+/*page detail
+*/
+/* styles.css */
+.event-hero {
+    max-height: 400px; /* Ajustez cette valeur selon vos besoins */
+    overflow: hidden;
+    position: relative;
+}
+
+.event-hero img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.event-details {
+    margin-top: 20px;
+}
