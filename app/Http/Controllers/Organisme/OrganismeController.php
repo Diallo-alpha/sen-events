@@ -31,13 +31,18 @@ class OrganismeController extends Controller
     }
 
     // View inscrit organisme
-    public function inscrit()
+    public function inscrit($evenementId)
     {
         $organismeId = Auth::id();
-        $evenements = Evenement::where('organisme_id', $organismeId)->with('reservations.user')->get();
+        $evenement = Evenement::where('organisme_id', $organismeId)->findOrFail($evenementId);
+
+        $reservations = $evenement->reservations()->with('user')->get();
+
         list($evenementsCount, $reservationsCount) = $this->getOrganismeCounters();
-        return view('organisme.inscrit', compact('evenements', 'evenementsCount', 'reservationsCount'));
+
+        return view('organisme.inscrit', compact('evenement', 'reservations', 'evenementsCount', 'reservationsCount'));
     }
+
 
     // View evenements
     public function evenements()

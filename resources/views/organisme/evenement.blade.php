@@ -46,21 +46,23 @@
                 </thead>
                 <tbody>
                     @foreach($evenements as $evenement)
-                        <tr>
-                            <td>{{ $evenement->nom }}</td>
-                            <td>{{ $evenement->description }}</td>
-                            <td>{{ $evenement->date_evenement }}</td>
-                            <td>{{ $evenement->lieu }}</td>
-                            <td>
-                                <a href="{{ route('evenement.update', $evenement->id) }}" class="btn btn-warning">Modifier</a>
-                                <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>{{ $evenement->nom }}</td>
+                        <td>{{ $evenement->description }}</td>
+                        <td>{{ $evenement->date_evenement }}</td>
+                        <td>{{ $evenement->lieu }}</td>
+                        <td>
+                            <a href="{{ route('evenement.update', $evenement->id) }}" class="btn btn-warning">Modifier</a>
+                            <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                            <a href="{{ route('organisme.inscrit', $evenement->id) }}" class="btn btn-info">Voir les réservations</a>
+                        </td>
+                    </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>

@@ -15,7 +15,7 @@ Route::prefix('organisme')->name('organisme.')->group(function () {
     Route::middleware('auth:organisme')->group(function () {
         Route::get('dashboard', [OrganismeController::class, 'index'])->name('dashboard');
         Route::get('evenements', [OrganismeController::class, 'evenements'])->name('evenements');
-        Route::get('utilisateurs', [OrganismeController::class, 'inscrit'])->name('inscrit');
+        Route::get('/evenements/{evenementId}/inscrit', [OrganismeController::class, 'inscrit'])->name('inscrit');
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
 });

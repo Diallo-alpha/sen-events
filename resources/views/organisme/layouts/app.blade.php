@@ -42,12 +42,14 @@
                 </li>
 
                 <li class="{{ request()->routeIs('organisme.utilisateurs') ? 'active' : '' }}">
-                    <a href="{{ route('organisme.inscrit') }}">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Utilisateurs</span>
-                    </a>
+                    @isset($evenement)
+                        <a href="{{ route('organisme.inscrit', ['evenementId' => $evenement->id]) }}">
+                            <span class="icon">
+                                <ion-icon name="people-outline"></ion-icon>
+                            </span>
+                            <span class="title">Utilisateurs</span>
+                        </a>
+                    @endisset
                 </li>
                 <li>
                     <a href="{{ route('organisme.logout') }}"
@@ -86,10 +88,9 @@
         </div>
     </div>
 
-            <!-- ================ Order Details List ================= -->
+    <!-- ================ Order Details List ================= -->
 
-      <!-- Ici doit s'afficher les tous les cruds -->
-
+    <!-- Ici doit s'afficher les tous les cruds -->
 
     <!-- =========== Scripts =========  -->
     <script src="{{asset('js/admin.js')}}"></script>
