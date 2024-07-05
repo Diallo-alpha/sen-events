@@ -49,17 +49,41 @@ body {
     text-decoration: underline;
 }
 
-.button {
+/* .button {
     background-color: var(--Primaire);
     color: white;
-    padding: 10px 20px;
+    padding: 8px 12px;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 16px;
+    font-weight: bold;
+    font-weight: bold;
+    text-decoration: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+} */
+.button-create-event,.button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--Primaire);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 16px;
     font-weight: bold;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
+.button-create-event i {
+    margin-right: 8px;
+}
+
+.button-create-event:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
 /* Hero section */
 .hero {
     margin-top: 5px;
@@ -79,49 +103,9 @@ body {
 }
 .carousel-item img {
     width: 150%;
-    height: 657px; /* ou ajustez la hauteur selon vos besoins */
-    object-fit: cover;
-}
-
-/* .carousel-indicators .active{
-    width: 160% !important;
     height: 657px;
     object-fit: cover;
-} */
-/* .hero .container {
-    width: 100%;
-    height: 627px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    flex-shrink: 0;
-} */
-
-/* .gradient-text {
-    background: linear-gradient(105deg, #FF3337 -0.04%, #F8CA53 23.08%, #009A8F 38.7%, rgba(255, 255, 255, 0.19) 72.71%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    width: 560px;
-    height: 299px;
-    flex-direction: row;
-    justify-content: center;
-    font-size: 140px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 153px; /* 109.286% */
-   /* font-family: 'Montserrat', sans-serif;
-} */
-
-/* .text-hero {
-    color: var(--gray-100);
-    text-align: justify;
-    font-family: 'Poppins', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 4.16px;
-} */
+}
 
 .buttonEv {
     background-color: #00c853;

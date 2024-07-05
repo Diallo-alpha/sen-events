@@ -39,7 +39,10 @@
                 @csrf
             </form>
         @else
-            <a href="{{ route('login') }}" class="button">Connexion</a>
+        <a href="{{ route('organisme.register') }}" class="button button-create-event">
+            <i class="fas fa-plus "></i> <span></span>Créer un événement
+        </a>
+        <a href="{{ route('login') }}" class="button">Connexion</a>
         @endif
     </div>
     <section class="hero">
