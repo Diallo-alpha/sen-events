@@ -11,7 +11,9 @@ class Reservation extends Model
     protected $fillable = [
         'evenement_id', 'user_id', 'statut',
     ];
-
+    protected $attributes = [
+        'statut' => 'accepter',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

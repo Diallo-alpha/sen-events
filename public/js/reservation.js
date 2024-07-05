@@ -7,10 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('confirmReservationButton').addEventListener('click', function () {
-        // Handle the reservation logic here
-        // For example, you might want to send an AJAX request to your server
-        alert('Réservation confirmée !');
-        $('#reservationModal').modal('hide');
+    $('#reservationModal').on('show.bs.modal', function () {
+        var evenementId = document.querySelector('meta[name="event-id"]').content;
+        var modal = $(this);
+        modal.find('.modal-body #modal_evenement_id').val(evenementId);
     });
 });

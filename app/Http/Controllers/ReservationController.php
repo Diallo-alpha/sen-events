@@ -32,17 +32,13 @@ class ReservationController extends Controller
             'user_id' => 'required',
         ]);
 
-        // Définir la valeur par défaut pour 'statut'
-        $reservationData = $request->all();
-        $reservationData['statut'] = $reservationData['statut'] ?? 'accepter';
+        $reservation = new Reservation();
+        $reservation->evenement_id = $request->evenement_id;
+        $reservation->user_id = $request->user_id;
+        $reservation->statut = 'accepter';
+        $reservation->save();
 
-        $reservation = Reservation::create($reservationData);
-
-        // Envoyer un email de confirmation
-        // Mail::to(auth()->user()->email)->send(new ReservationCreated($reservation));
-
-        return redirect()->route('portail.index')
-                         ->with('success', 'Réservation créée avec succès.');
+        return redirect()->route('portail.index')->with('success', 'Réservation créée avec succès.');
     }
 
     public function show($id)
