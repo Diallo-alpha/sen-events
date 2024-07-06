@@ -1,6 +1,5 @@
 <x-organisme-app-layout>
-
-    @section('title', 'Dashboard')
+    @section('title', 'Dashboard - Réservations Refusées')
 
     @section('titre-page')
         @if(session()->has('organisme_id'))
@@ -29,6 +28,7 @@
             </div>
         </div>
     @endsection
+
     @section('content')
     <div class="container">
         <h1>Liste des inscrits pour {{ $evenement->nom }}</h1>
@@ -80,8 +80,7 @@
                 </tbody>
             </table>
         </div>
+        <button onclick="window.print()" class="btn btn-primary">Télécharger</button>
     </div>
-    
-@endsection
+    @endsection
 </x-organisme-app-layout>
-

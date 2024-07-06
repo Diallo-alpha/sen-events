@@ -25,3 +25,10 @@ require __DIR__.'/evenement.php';
 Route::put('reservation/{id}/approve', [ReservationController::class, 'approveReservation'])->name('approveReservation');
 Route::put('reservation/{id}/reject', [ReservationController::class, 'rejectReservation'])->name('rejectReservation');
 Route::resource('reservations', ReservationController::class);
+
+
+
+
+// routes/web.php
+Route::get('/evenement/{id}/reservations/acceptees', [ReservationController::class, 'showAcceptedReservations'])->name('reservations.accepted');
+Route::get('/evenement/{id}/reservations/refusees', [ReservationController::class, 'showRejectedReservations'])->name('reservations.rejected');
