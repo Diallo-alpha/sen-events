@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Organisme extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
+    protected $guard_name = 'organisme';
 
     protected $fillable = [
         'nom', 'description', 'logo', 'adresse', 'secteur_activite', 'ninea', 'date_creation', 'email', 'password',

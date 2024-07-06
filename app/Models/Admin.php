@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
+    protected $guard_name = 'admins';
     protected static function boot()
     {
         parent::boot();
