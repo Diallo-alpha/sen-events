@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Admin;
+use App\Models\Organisme;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -23,11 +25,31 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        if ($this->attemptLogin($credentials, 'admins', 'admin.dashboard')) {
+            return redirect()->intended(route('admin.dashboard'));
+        } elseif ($this->attemptLogin($credentials, 'organisme', 'organisme.dashboard')) {
+            return redirect()->intended(route('organisme.dashboard'));
+        } elseif ($this->attemptLogin($credentials, 'web', 'portail.index')) {
+            return redirect()->intended(route('portail.index'));
+        }
 
-        return redirect()->intended(route('portail.index'));
+        return back()->withErrors([
+            'email' => 'Les informations d\'identification ne correspondent pas.',
+        ]);
+    }
+
+    /**
+     * Attempt to log the user into the application.
+     */
+    protected function attemptLogin($credentials, $guard, $redirectRoute)
+    {
+        if (Auth::guard($guard)->attempt($credentials)) {
+            session(['guard' => $guard]);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -35,12 +57,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        $guard = session('guard', 'web');
+        Auth::guard($guard)->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
 }
+
