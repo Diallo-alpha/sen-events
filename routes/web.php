@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortailController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ReservationController;
-
 
 Route::get('/', [PortailController::class, 'index'])->name('portail.index');
 
@@ -17,18 +17,11 @@ require __DIR__.'/evenement.php';
 
 
 
-// Route::put('reservation/{id}',[ReservationController::class, 'update'])->name('mail');
-// Route::resource('reservations', ReservationController::class);
+// Approval and Rejection routes
+Route::put('reservation/{id}/approve', [ReservationController::class, 'approveReservation'])->name('reservation.approve');
+Route::put('reservation/{id}/reject', [ReservationController::class, 'rejectReservation'])->name('reservation.reject');
 
+// Display routes
+Route::get('/evenements/{id}/reservations/acceptees', [ReservationController::class, 'showAcceptedReservations'])->name('reservations.accepted');
+Route::get('/evenements/{id}/reservations/refusees', [ReservationController::class, 'showRejectedReservations'])->name('reservations.rejected');
 
-
-Route::put('reservation/{id}/approve', [ReservationController::class, 'approveReservation'])->name('approveReservation');
-Route::put('reservation/{id}/reject', [ReservationController::class, 'rejectReservation'])->name('rejectReservation');
-Route::resource('reservations', ReservationController::class);
-
-
-
-
-// routes/web.php
-Route::get('/evenement/{id}/reservations/acceptees', [ReservationController::class, 'showAcceptedReservations'])->name('reservations.accepted');
-Route::get('/evenement/{id}/reservations/refusees', [ReservationController::class, 'showRejectedReservations'])->name('reservations.rejected');

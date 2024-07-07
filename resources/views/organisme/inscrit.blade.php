@@ -1,5 +1,4 @@
 <x-organisme-app-layout>
-
     @section('title', 'Dashboard')
 
     @section('titre-page')
@@ -29,15 +28,14 @@
             </div>
         </div>
     @endsection
+
     @section('content')
     <div class="container">
         <h1>Liste des inscrits pour {{ $evenement->nom }}</h1>
         <div class="row mb-3">
             <div class="col-md-6">
-                <br>
-                <br>
                 <p><strong>Places restantes :</strong> {{ $placesRestantes }}</p>
-                <br>
+                <a href="{{ route('reservations.accepted', $evenement->id) }}" class="btn btn-primary">Voir les réservations acceptées</a>
             </div>
         </div>
         <div class="table-responsive">
@@ -60,16 +58,14 @@
                             <td>{{ $reservation->user->email }}</td>
                             <td>{{ $reservation->created_at }}</td>
                             <td>
-                                <!-- Form pour accepter la réservation -->
-                                <form action="{{ route('approveReservation', $reservation->id) }}" method="post">
+                                <form action="{{ route('reservation.approve', $reservation->id) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <button type="submit" class="btn btn-success">Accepter</button>
                                 </form>
                             </td>
                             <td>
-                                <!-- Form pour refuser la réservation -->
-                                <form action="{{ route('rejectReservation', $reservation->id) }}" method="post">
+                                <form action="{{ route('reservation.reject', $reservation->id) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <button type="submit" class="btn btn-danger">Refuser</button>
@@ -81,7 +77,5 @@
             </table>
         </div>
     </div>
-    
-@endsection
+    @endsection
 </x-organisme-app-layout>
-

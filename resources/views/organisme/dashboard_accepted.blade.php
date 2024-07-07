@@ -8,6 +8,14 @@
     @endsection
 
     @section('cardBox')
+
+    le: .../.../.....
+
+
+
+    @endsection
+{{--
+    @section('cardBox')
         <div class="card">
             <div>
                 <div class="numbers">{{ $reservationsCount }}</div>
@@ -27,7 +35,7 @@
                 <ion-icon name="eye-outline"></ion-icon>
             </div>
         </div>
-    @endsection
+    @endsection --}}
 
     @section('content')
     <div class="container">
@@ -40,6 +48,9 @@
                 <br>
             </div>
         </div>
+        <button onclick="window.print()" class="btn btn-primary">Télécharger</button>
+    </div>
+        </div>
         <div class="table-responsive">
             <table class="table custom-table">
                 <thead>
@@ -48,8 +59,8 @@
                         <th scope="col">Nom de l'utilisateur</th>
                         <th scope="col">Email</th>
                         <th scope="col">Date d'inscription</th>
-                        <th scope="col">Validation</th>
-                        <th scope="col">Annulation</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Signature</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,28 +70,11 @@
                             <td>{{ $reservation->user->nom }}</td>
                             <td>{{ $reservation->user->email }}</td>
                             <td>{{ $reservation->created_at }}</td>
-                            <td>
-                                <!-- Form pour accepter la réservation -->
-                                <form action="{{ route('approveReservation', $reservation->id) }}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="btn btn-success">Accepter</button>
-                                </form>
-                            </td>
-                            <td>
-                                <!-- Form pour refuser la réservation -->
-                                <form action="{{ route('rejectReservation', $reservation->id) }}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="btn btn-danger">Refuser</button>
-                                </form>
-                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <button onclick="window.print()" class="btn btn-primary">Télécharger</button>
-    </div>
+
     @endsection
 </x-organisme-app-layout>
