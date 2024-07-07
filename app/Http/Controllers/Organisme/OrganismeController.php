@@ -61,7 +61,7 @@ public function inscrit($evenementId)
         'placesRestantes' => $placesRestantes,
         'reservationsCount' => $reservationsCount,
         'evenementsCount' => $evenementsCount,
-        'reservationId' => $reservationId,
+        // 'reservationId' => $reservationId,
     ]);
 }
 
