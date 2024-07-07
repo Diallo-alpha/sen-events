@@ -6,10 +6,6 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\RoleController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('guest:admins')->group(function () {
-        Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-        Route::post('login', [AuthenticatedSessionController::class, 'store']);
-    });
 
     Route::middleware('auth:admins')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');

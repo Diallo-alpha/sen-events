@@ -40,13 +40,13 @@ class Authenticate
         {
             if(Route::is('admin.*'))
                 {
-                    return route('admin.login');
+                    return route('login');
                 }
 
             # organisme
             if(Route::is('organisme.*'))
                 {
-                    return route('organisme.login');
+                    return route('login');
                 }
 
             return route('login');

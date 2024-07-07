@@ -13,22 +13,22 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
-    {
-        return view('admin.auth.login');
-    }
+    // public function create(): View
+    // {
+    //     return view('admin.auth.login');
+    // }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(AdminLoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+    // public function store(AdminLoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
 
-        $request->session()->regenerate();
+    //     $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
-    }
+    //     return redirect()->route('admin.dashboard');
+    // }
 
     /**
      * Destroy an authenticated session.
