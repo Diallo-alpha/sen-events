@@ -13,27 +13,27 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
-     */
-    public function create()
-    {
-        return view('organisme.auth.login');
-    }
-    public function store(OrganisationLoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+      */
+    // public function create()
+    // {
+    //     return view('organisme.auth.login');
+    // }
+    // public function store(OrganisationLoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
 
-        // Récupérer l'organisme authentifié
-        $organisme = Auth::guard('organisme')->user();
+    //     // Récupérer l'organisme authentifié
+    //     $organisme = Auth::guard('organisme')->user();
 
-        // Stocker l'ID de l'organisme dans la session
-        if ($organisme) {
-            session(['organisme_id' => $organisme->id]);
-        }
+    //     // Stocker l'ID de l'organisme dans la session
+    //     if ($organisme) {
+    //         session(['organisme_id' => $organisme->id]);
+    //     }
 
-        $request->session()->regenerate();
+    //     $request->session()->regenerate();
 
-        return redirect()->route('organisme.dashboard');
-    }
+    //     return redirect()->route('organisme.dashboard');
+    // }
 
     /**
      * Destroy an authenticated session.

@@ -28,21 +28,23 @@ class AuthenticatedSessionController extends Controller
         $credentials = $request->only('email', 'password');
 
         if ($this->attemptLogin($credentials, 'admins', 'admin.dashboard')) {
-            return redirect()->intended(route('admin.dashboard'));
+            $user = Auth::guard('admins')->user();
+            // dd($user); // Affiche les détails de l'admin connecté
+            return redirect()->route('admin.evenements');
         } elseif ($this->attemptLogin($credentials, 'organisme', 'organisme.dashboard')) {
-            return redirect()->intended(route('organisme.dashboard'));
+            $user = Auth::guard('organisme')->user();
+            // dd($user); // Affiche les détails de l'organisme connecté
+            return redirect()->route('organisme.dashboard');
         } elseif ($this->attemptLogin($credentials, 'web', 'portail.index')) {
-            return redirect()->intended(route('portail.index'));
+            $user = Auth::guard('web')->user();
+            // dd($user); // Affiche les détails de l'utilisateur connecté
+            return redirect()->route('portail.index');
         }
 
         return back()->withErrors([
             'email' => 'Les informations d\'identification ne correspondent pas.',
         ]);
     }
-
-    /**
-     * Attempt to log the user into the application.
-     */
     protected function attemptLogin($credentials, $guard, $redirectRoute)
     {
         if (Auth::guard($guard)->attempt($credentials)) {
@@ -66,4 +68,3 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 }
-

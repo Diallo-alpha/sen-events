@@ -23,7 +23,7 @@
                         <span class="title">@yield('titre-page', 'Admin')</span>
                     </a>
                 </li>
-
+{{-- 
                 <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}">
                         <span class="icon">
@@ -31,7 +31,7 @@
                         </span>
                         <span class="title">Dashboard</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="{{ request()->routeIs('admin.evenements') ? 'active' : '' }}">
                     <a href="{{ route('admin.evenements') }}">
@@ -75,7 +75,8 @@
                         </span>
                         <span class="title">Deconnexion</span>
                     </a>
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                          style="display: none;">
                         @csrf
                     </form>
                 </li>

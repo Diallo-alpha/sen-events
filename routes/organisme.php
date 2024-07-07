@@ -6,8 +6,8 @@ use App\Http\Controllers\Organisme\OrganismeController;
 
 Route::prefix('organisme')->name('organisme.')->group(function () {
     Route::middleware('guest:organisme')->group(function () {
-        Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-        Route::post('login', [AuthenticatedSessionController::class, 'store']);
+        // Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+        // Route::post('login', [AuthenticatedSessionController::class, 'store']);
         Route::get('register', [RegisteredUserController::class, 'createOrganisme'])->name('register');
         Route::post('register', [RegisteredUserController::class, 'storeOrganisme'])->name('store');
     });

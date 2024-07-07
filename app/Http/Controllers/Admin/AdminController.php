@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Association;
-use App\Models\Organisme;
 use App\Models\User;
 use App\Models\Evenement;
+use App\Models\Organisme;
+use App\Models\Association;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -24,6 +25,9 @@ class AdminController extends Controller
     public function dashboard()
     {
         list($eventCount, $associationCount, $userCount) = $this->getCounters();
+        Log::info('Event Count: ' . $eventCount);
+        Log::info('Association Count: ' . $associationCount);
+        Log::info('User Count: ' . $userCount);
         return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
     }
 
