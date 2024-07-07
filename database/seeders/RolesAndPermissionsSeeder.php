@@ -47,4 +47,3 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'supprimer_reservation', 'guard_name' => 'organisme'])->assignRole($organismeRole);
     }
 }
-
