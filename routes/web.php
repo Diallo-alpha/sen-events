@@ -18,8 +18,14 @@ require __DIR__.'/evenement.php';
 
 
 // Approval and Rejection routes
+
+
+
 Route::put('reservation/{id}/approve', [ReservationController::class, 'approveReservation'])->name('reservation.approve');
 Route::put('reservation/{id}/reject', [ReservationController::class, 'rejectReservation'])->name('reservation.reject');
+Route::get('reservations/count/{evenementId}', [ReservationController::class, 'getReservationCount']);
+// Route::put('reservation/{id}/approve', [ReservationController::class, 'approveReservation'])->name('reservation.approve');
+// Route::put('reservation/{id}/reject', [ReservationController::class, 'rejectReservation'])->name('reservation.reject');
 
 // Display routes
 Route::get('/evenements/{id}/reservations/acceptees', [ReservationController::class, 'showAcceptedReservations'])->name('reservations.accepted');

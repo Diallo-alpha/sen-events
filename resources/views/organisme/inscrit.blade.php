@@ -10,7 +10,7 @@
     @section('cardBox')
         <div class="card">
             <div>
-                <div class="numbers">{{ $reservationsCount }}</div>
+                <div class="numbers" id="reservations-count">{{ $reservationsCount }}</div>
                 <div class="cardName">Places Réservées</div>
             </div>
             <div class="iconBx">
@@ -20,7 +20,7 @@
 
         <div class="card">
             <div>
-                <div class="numbers">{{ $evenementsCount }}</div>
+                <div class="numbers" id="evenements-count">{{ $evenementsCount }}</div>
                 <div class="cardName">Evenements</div>
             </div>
             <div class="iconBx">
@@ -34,7 +34,7 @@
         <h1>Liste des inscrits pour {{ $evenement->nom }}</h1>
         <div class="row mb-3">
             <div class="col-md-6">
-                <p><strong>Places restantes :</strong> {{ $placesRestantes }}</p>
+                <p><strong>Places restantes :</strong> <span id="places-restantes">{{ $placesRestantes }}</span></p>
                 <a href="{{ route('reservations.accepted', $evenement->id) }}" class="btn btn-primary">Voir les réservations acceptées</a>
             </div>
         </div>
@@ -52,24 +52,16 @@
                 </thead>
                 <tbody>
                     @foreach($reservations as $reservation)
-                        <tr>
+                        <tr id="reservation-{{ $reservation->id }}">
                             <td>{{ $evenement->nom }}</td>
                             <td>{{ $reservation->user->nom }}</td>
                             <td>{{ $reservation->user->email }}</td>
                             <td>{{ $reservation->created_at }}</td>
                             <td>
-                                <form action="{{ route('reservation.approve', $reservation->id) }}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="btn btn-success">Accepter</button>
-                                </form>
+                                <button class="btn btn-success approve-btn" data-id="{{ $reservation->id }}">Accepter</button>
                             </td>
                             <td>
-                                <form action="{{ route('reservation.reject', $reservation->id) }}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="btn btn-danger">Refuser</button>
-                                </form>
+                                <button class="btn btn-danger reject-btn" data-id="{{ $reservation->id }}">Refuser</button>
                             </td>
                         </tr>
                     @endforeach
@@ -77,5 +69,52 @@
             </table>
         </div>
     </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.approve-btn').click(function() {
+                var reservationId = $(this).data('id');
+                $.ajax({
+                    url: '/reservation/' + reservationId + '/approve',
+                    method: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#reservation-' + reservationId).remove();
+                        updateReservationCounters(); // Mettre à jour les compteurs après suppression
+                    }
+                });
+            });
+
+            $('.reject-btn').click(function() {
+                var reservationId = $(this).data('id');
+                $.ajax({
+                    url: '/reservation/' + reservationId + '/reject',
+                    method: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#reservation-' + reservationId).remove();
+                        updateReservationCounters(); // Mettre à jour les compteurs après suppression
+                    }
+                });
+            });
+
+            function updateReservationCounters() {
+                $.ajax({
+                    url: '/reservations/count/{{ $evenement->id }}',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#reservations-count').text(response.reservationsCount); // Mettre à jour le compteur de réservations
+                        $('#places-restantes').text(response.placesRestantes); // Mettre à jour les places restantes
+                    }
+                });
+            }
+        });
+    </script>
     @endsection
 </x-organisme-app-layout>
