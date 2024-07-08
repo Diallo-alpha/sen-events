@@ -1,12 +1,13 @@
 <x-admin-app-layout>
     @section('title', 'Dashboard')
 
-    @section('titre-page', 'evenements')
+    @section('titre-page', 'Événements')
+
     @section('cardBox')
     <div class="card">
         <div>
             <div class="numbers">{{ $eventCount }}</div>
-            <div class="cardName">Evenements</div>
+            <div class="cardName">Événements</div>
         </div>
         <div class="iconBx">
             <ion-icon name="eye-outline"></ion-icon>
@@ -65,7 +66,7 @@
                             <td>{{ $event->date }}</td>
                             <td>{{ $event->organisme->nom }}</td>
                             <td>
-                                <a href="{{ route('admin.events.show', $event->id) }}" class="btn btn-info">Détails</a>
+                                {{-- <a href="{{ route('admin.events.show', $event->id) }}" class="btn btn-info">Détails</a> --}}
                                 <form action="{{ route('admin.events.delete', $event->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

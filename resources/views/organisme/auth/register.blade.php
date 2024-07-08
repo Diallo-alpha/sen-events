@@ -112,7 +112,7 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Créer</button>
-                    <a href="{{ route('organisme.login') }}" class="btn-info">Se connecter</a>
+                    <a href="{{ route('login') }}" class="btn-info">Se connecter</a>
                 </form>
             </div>
         </div>
