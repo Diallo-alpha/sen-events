@@ -59,7 +59,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $guard = session('guard', 'web');
+        $guard = $request->route()->getName();
+        switch ($guard) {
+            case 'web.logout':
+                $guard = 'web';
+                break;
+            case 'admin.logout':
+                $guard = 'admins';
+                break;
+            case 'organisme.logout':
+                $guard = 'organisme';
+                break;
+            default:
+                $guard = 'web';
+                break;
+        }
+
         Auth::guard($guard)->logout();
 
         $request->session()->invalidate();

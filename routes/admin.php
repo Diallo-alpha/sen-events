@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\RoleController;
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admins')->group(function () {
@@ -26,5 +27,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('utilisateurs/{id}', [AdminController::class, 'deleteUser'])->name('utilisateurs.delete');
         Route::delete('associations/{id}', [AdminController::class, 'deleteAssociation'])->name('associations.delete');
     });
+
+        // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        // Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        // Route::get('admin/association', [AdminController::class, 'association'])->name('aassociation');
+        // Route::get('admin/evenements', [AdminController::class, 'evenements'])->name('admin.evenements');
+        // Route::get('admin/utilisateurs', [AdminController::class, 'utilisateur'])->name('admin.utilisateurs');
 });
 
