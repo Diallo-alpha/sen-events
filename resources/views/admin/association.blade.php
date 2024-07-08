@@ -43,11 +43,13 @@
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-warning">{{ $association->is_active ? 'Désactiver' : 'Activer' }}</button>
                             </form>
+
                             <form action="{{ route('admin.associations.delete', $association->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette association ?')">Supprimer</button>
                             </form>
+                    
                         </td>
                     </tr>
                 @endforeach

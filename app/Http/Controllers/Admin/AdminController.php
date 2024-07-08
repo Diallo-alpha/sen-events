@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Organisme;
-use App\Models\Association;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,24 +26,17 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
     }
 
-    // // Evenement admin
-    // public function evenements()
-    // {
-    //     list($eventCount, $associationCount, $userCount) = $this->getCounters();
-    //     return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount'));
-    // }
-
     public function evenements()
-{
-    list($eventCount, $associationCount, $userCount) = $this->getCounters();
+    {
+        list($eventCount, $associationCount, $userCount) = $this->getCounters();
 
-    // Récupérer uniquement les événements des associations actives
-    $events = Evenement::whereHas('association', function ($query) {
-        $query->where('is_active', true);
-    })->get();
+        // Récupérer uniquement les événements des associations actives
+        $events = Evenement::whereHas('organisme', function ($query) {
+            $query->where('is_active', true);
+        })->get();
 
-    return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount', 'events'));
-}
+        return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount', 'events'));
+    }
 
     // Association admin
     public function association()
@@ -66,7 +58,6 @@ class AdminController extends Controller
 
         return view('admin.utilisateur', compact('eventCount', 'associationCount', 'userCount', 'users'));
     }
-
 
     // Supprimer un utilisateur
     public function deleteUser($id)
@@ -90,17 +81,15 @@ class AdminController extends Controller
         return redirect()->route('admin.association')->with('error', 'Association introuvable.');
     }
 
-     // desactiver ou activer  une association
-
+    // Désactiver ou activer une association
     public function toggleAssociation($id)
-{
-    $association = Organisme::find($id);
-    if ($association) {
-        $association->is_active = !$association->is_active;
-        $association->save();
-        return redirect()->route('admin.association')->with('success', 'Statut de l\'association mis à jour avec succès.');
+    {
+        $association = Organisme::find($id);
+        if ($association) {
+            $association->is_active = !$association->is_active;
+            $association->save();
+            return redirect()->route('admin.association')->with('success', 'Statut de l\'association mis à jour avec succès.');
+        }
+        return redirect()->route('admin.association')->with('error', 'Association introuvable.');
     }
-    return redirect()->route('admin.association')->with('error', 'Association introuvable.');
-}
-
 }

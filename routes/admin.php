@@ -31,5 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::delete('/utilisateurs/{id}', [AdminController::class, 'deleteUser'])->name('utilisateurs.delete');
         Route::delete('/associations/{id}', [AdminController::class, 'deleteAssociation'])->name('associations.delete');
+        Route::patch('/associations/{id}/toggle', [AdminController::class, 'toggleAssociation'])->name('associations.toggle');
+        Route::delete('/associations/{id}', [AdminController::class, 'deleteAssociation'])->name('associations.delete');
     });
 });
