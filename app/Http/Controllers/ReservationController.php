@@ -98,6 +98,30 @@ class ReservationController extends Controller
         $reservation->delete();
         return redirect()->route('reservations.index')->with('success', 'Réservation supprimée avec succès.');
     }
+    //                     public function approveReservation($id)
+    //                     {
+    //                         $reservation = Reservation::findOrFail($id);
+    //                         $reservation->statut = 'approuvé';
+    //                         $reservation->save();
+
+    //                         Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
+
+    //                         return back()->with('success', 'Réservation approuvée avec succès !');
+    //                     }
+
+                        // public function rejectReservation($id)
+                        // {
+                        //     $reservation = Reservation::findOrFail($id);
+                        //     $reservation->statut = 'refusé';
+                        //     $reservation->save();
+
+                        //     Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
+
+                        //     return back()->with('success', 'Réservation refusée avec succès !');
+                        // }
+
+
+
                         public function approveReservation($id)
                         {
                             $reservation = Reservation::findOrFail($id);
@@ -106,7 +130,7 @@ class ReservationController extends Controller
 
                             Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-                            return back()->with('success', 'Réservation approuvée avec succès !');
+                            return response()->json(['success' => 'Réservation approuvée avec succès !']);
                         }
 
                         public function rejectReservation($id)
@@ -117,8 +141,28 @@ class ReservationController extends Controller
 
                             Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-                            return back()->with('success', 'Réservation refusée avec succès !');
+                            return response()->json(['success' => 'Réservation refusée avec succès !']);
                         }
+
+                        // public function getReservationCount($evenementId)
+                        // {
+                        //     $reservationsCount = Reservation::where('evenement_id', $evenementId)->count();
+                        //     return response()->json(['reservationsCount' => $reservationsCount]);
+                        // }
+
+ public function getReservationCount($evenementId)
+{
+    $reservationsCount = Reservation::where('evenement_id', $evenementId)->count();
+    $evenement = Evenement::findOrFail($evenementId);
+    $placesRestantes = $evenement->places_disponible - $reservationsCount;
+
+    return response()->json([
+        'reservationsCount' => $reservationsCount,
+        'placesRestantes' => $placesRestantes
+    ]);
+}
+
+
 
                         public function showAcceptedReservations($evenementId)
                         {

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Organisme;
-use App\Models\Association;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
@@ -31,11 +29,16 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
     }
 
-    // Evenement admin
     public function evenements()
     {
         list($eventCount, $associationCount, $userCount) = $this->getCounters();
-        return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount'));
+
+        // Récupérer uniquement les événements des associations actives
+        $events = Evenement::whereHas('organisme', function ($query) {
+            $query->where('is_active', true);
+        })->get();
+
+        return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount', 'events'));
     }
 
     // Association admin
@@ -59,7 +62,6 @@ class AdminController extends Controller
         return view('admin.utilisateur', compact('eventCount', 'associationCount', 'userCount', 'users'));
     }
 
-
     // Supprimer un utilisateur
     public function deleteUser($id)
     {
@@ -78,6 +80,18 @@ class AdminController extends Controller
         if ($association) {
             $association->delete();
             return redirect()->route('admin.association')->with('success', 'Association supprimée avec succès.');
+        }
+        return redirect()->route('admin.association')->with('error', 'Association introuvable.');
+    }
+
+    // Désactiver ou activer une association
+    public function toggleAssociation($id)
+    {
+        $association = Organisme::find($id);
+        if ($association) {
+            $association->is_active = !$association->is_active;
+            $association->save();
+            return redirect()->route('admin.association')->with('success', 'Statut de l\'association mis à jour avec succès.');
         }
         return redirect()->route('admin.association')->with('error', 'Association introuvable.');
     }
