@@ -41,7 +41,7 @@
                             <form action="{{ route('admin.associations.toggle', $association->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-warning">{{ $association->is_active ? 'Désactiver' : 'Activer' }}</button>
+                                <button type="submit" class="btn btn-primary">{{ $association->is_active ? 'Désactiver' : 'Activer' }}</button>
                             </form>
 
                             <form action="{{ route('admin.associations.delete', $association->id) }}" method="POST" style="display:inline;">
@@ -49,7 +49,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette association ?')">Supprimer</button>
                             </form>
-                    
+
                         </td>
                     </tr>
                 @endforeach
