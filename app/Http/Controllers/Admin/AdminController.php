@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Organisme;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
@@ -23,9 +22,6 @@ class AdminController extends Controller
     public function dashboard()
     {
         list($eventCount, $associationCount, $userCount) = $this->getCounters();
-        Log::info('Event Count: ' . $eventCount);
-        Log::info('Association Count: ' . $associationCount);
-        Log::info('User Count: ' . $userCount);
         return view('admin.dashboard', compact('eventCount', 'associationCount', 'userCount'));
     }
 
@@ -39,6 +35,24 @@ class AdminController extends Controller
         })->get();
 
         return view('admin.evenement', compact('eventCount', 'associationCount', 'userCount', 'events'));
+    }
+
+    // Afficher les détails d'un événement
+    // public function showEvent($id)
+    // {
+    //     $event = Evenement::findOrFail($id);
+    //     return view('a', compact('event'));
+    // }
+
+    // Supprimer un événement
+    public function deleteEvent($id)
+    {
+        $event = Evenement::find($id);
+        if ($event) {
+            $event->delete();
+            return redirect()->route('admin.evenements')->with('success', 'Événement supprimé avec succès.');
+        }
+        return redirect()->route('admin.evenements')->with('error', 'Événement introuvable.');
     }
 
     // Association admin
@@ -83,6 +97,11 @@ class AdminController extends Controller
         }
         return redirect()->route('admin.association')->with('error', 'Association introuvable.');
     }
+    public function showAssociation($id)
+{
+    $association = Organisme::findOrFail($id);
+    return view('portail.detailsEvents', compact('association'));
+}
 
     // Désactiver ou activer une association
     public function toggleAssociation($id)
