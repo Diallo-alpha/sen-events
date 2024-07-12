@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Admin;
-use App\Models\Organisme;
-use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {

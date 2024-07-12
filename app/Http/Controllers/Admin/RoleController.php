@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    // Afficher le formulaire de création de rôle
     public function create()
     {
         try {
@@ -23,11 +24,12 @@ class RoleController extends Controller
 
             return view('admin.roles.create', compact('users', 'roles', 'permissions', 'organismes'));
         } catch (\Exception $e) {
-            Log::error('Error in RoleController@create: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while loading the page.');
+            Log::error('Erreur dans RoleController@create : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur s\'est produite lors du chargement de la page.');
         }
     }
 
+    // Enregistrer un nouveau rôle
     public function store(Request $request)
     {
         try {
@@ -52,12 +54,14 @@ class RoleController extends Controller
                 }
             }
 
-            return redirect()->back()->with('success', 'Role created successfully.');
+            return redirect()->back()->with('success', 'Rôle créé avec succès.');
         } catch (\Exception $e) {
-            Log::error('Error in RoleController@store: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while creating the role.');
+            Log::error('Erreur dans RoleController@store : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur s\'est produite lors de la création du rôle.');
         }
     }
+
+    // Obtenir le garde de l'utilisateur
     protected function getUserGuard(User $user)
     {
         if ($user instanceof Admin) {
@@ -67,6 +71,8 @@ class RoleController extends Controller
         }
         return 'web';
     }
+
+    // Assigner des rôles à un utilisateur
     public function assignRoleToUser(Request $request)
     {
         $request->validate([
@@ -76,27 +82,63 @@ class RoleController extends Controller
         ]);
 
         $user = User::findOrFail($request->user_id);
-        $userGuard = $this->getUserGuard($user);
+        $currentGuard = $this->getUserGuard($user);
 
         foreach ($request->roles as $roleName) {
-            // Vérifiez si le rôle existe pour le guard déterminé
-            $role = Role::where('name', $roleName)->where('guard_name', $userGuard)->first();
+            $role = Role::where('name', $roleName)->first();
 
-            // Créez le rôle s'il n'existe pas pour le guard
             if (!$role) {
-                $role = Role::create(['name' => $roleName, 'guard_name' => $userGuard]);
-                Log::info("Le rôle {$roleName} a été créé pour le guard {$userGuard} dans RoleController@assignRoleToUser");
+                return redirect()->back()->with('error', 'Le rôle n\'existe pas.');
             }
 
-            // Assignez le rôle à l'utilisateur
+            $newGuard = $role->guard_name;
+
+            // Changez le garde de l'utilisateur si nécessaire avant d'assigner le rôle
+            if ($currentGuard !== $newGuard) {
+                $user = $this->changeUserGuard($user, $newGuard);
+                $currentGuard = $newGuard;
+            }
+
+            // Assigner le rôle à l'utilisateur
             $user->assignRole($role);
         }
 
         return redirect()->back()->with('success', 'Rôles assignés avec succès.');
     }
 
+    protected function changeUserGuard(User $user, $newGuard)
+    {
+        // Copiez les données de l'utilisateur dans le modèle correspondant au nouveau garde
+        $userData = $user->toArray();
+        unset($userData['id']); // Supprimez l'ID pour éviter les conflits
 
+        // Incluez tous les champs obligatoires, comme 'password'
+        $userData['password'] = $user->password; // Assurez-vous que le mot de passe est haché
 
+        // Supprimez l'utilisateur de la table actuelle en fonction de son garde actuel
+        $currentGuard = $this->getUserGuard($user);
+        if ($currentGuard === 'admins') {
+            Admin::where('id', $user->id)->delete();
+        } elseif ($currentGuard === 'organisme') {
+            Organisme::where('id', $user->id)->delete();
+        } else {
+            User::where('id', $user->id)->delete();
+        }
+
+        // Créez un nouvel utilisateur dans la table correspondant au nouveau garde
+        if ($newGuard === 'admins') {
+            $newUser = Admin::create($userData);
+        } elseif ($newGuard === 'organisme') {
+            $newUser = Organisme::create($userData);
+        } else {
+            $newUser = User::create($userData);
+        }
+
+        // Retournez le nouvel utilisateur créé
+        return $newUser;
+    }
+
+    // Assigner des permissions à un rôle
     public function assignPermission(Request $request, Role $role)
     {
         try {
@@ -107,22 +149,24 @@ class RoleController extends Controller
 
             $role->syncPermissions($request->permissions);
 
-            return redirect()->back()->with('success', 'Permissions assigned successfully.');
+            return redirect()->back()->with('success', 'Permissions assignées avec succès.');
         } catch (\Exception $e) {
-            Log::error('Error in RoleController@assignPermission: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while assigning permissions.');
+            Log::error('Erreur dans RoleController@assignPermission : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'assignation des permissions.');
         }
     }
 
+    // Supprimer un rôle
     public function destroy(Role $role)
     {
         try {
             $role->delete();
 
-            return redirect()->back()->with('success', 'Role deleted successfully.');
+            return redirect()->back()->with('success', 'Rôle supprimé avec succès.');
         } catch (\Exception $e) {
-            Log::error('Error in RoleController@destroy: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while deleting the role.');
+            Log::error('Erreur dans RoleController@destroy : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Une erreur s\'est produite lors de la suppression du rôle.');
         }
     }
 }
+?>
