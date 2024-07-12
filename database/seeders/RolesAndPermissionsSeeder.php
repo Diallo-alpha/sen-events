@@ -28,7 +28,7 @@ class RolesAndPermissionsSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Rôles et permissions pour le garde admin
-        $adminRole = Role::create(['name' => 'admins', 'guard_name' => 'admins']);
+        $adminRole = Role::create(['name' => 'admin', 'guard_name' => 'admins']); // Changez 'admins' en 'admin'
         Permission::create(['name' => 'publier_evenement', 'guard_name' => 'admins'])->assignRole($adminRole);
         Permission::create(['name' => 'supprimer_evenement', 'guard_name' => 'admins'])->assignRole($adminRole);
         Permission::create(['name' => 'reserver_evenement', 'guard_name' => 'admins'])->assignRole($adminRole);
