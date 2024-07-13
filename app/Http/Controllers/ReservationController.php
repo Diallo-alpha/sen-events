@@ -41,13 +41,13 @@ class ReservationController extends Controller
 
         // Check if the deadline has passed
         if (Carbon::now()->gt($evenement->date_limite)) {
-            return back()->with('error', 'La date limite pour les réservations de cet événement est dépassée.');
+            return redirect()->back()->with('error', 'La date limite pour les réservations de cet événement est dépassée.');
         }
 
         // Check if there are available spots
         $reservationsCount = Reservation::where('evenement_id', $evenement->id)->count();
         if ($reservationsCount >= $evenement->places_disponible) {
-            return back()->with('error', 'Désolé, il n\'y a plus de places disponibles pour cet événement.');
+            return redirect()->back()->with('error', 'Désolé, il n\'y a plus de places disponibles pour cet événement.');
         }
 
         // Create the reservation
@@ -60,7 +60,7 @@ class ReservationController extends Controller
         // Send a confirmation email
         Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-        return redirect()->route('portail.index')->with('success', 'Réservation créée avec succès.');
+        return redirect()->back()->with('success', 'Réservation créée avec succès.');
     }
 
     public function show($id)
@@ -98,27 +98,6 @@ class ReservationController extends Controller
         $reservation->delete();
         return redirect()->route('reservations.index')->with('success', 'Réservation supprimée avec succès.');
     }
-    //                     public function approveReservation($id)
-    //                     {
-    //                         $reservation = Reservation::findOrFail($id);
-    //                         $reservation->statut = 'approuvé';
-    //                         $reservation->save();
-
-    //                         Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
-
-    //                         return back()->with('success', 'Réservation approuvée avec succès !');
-    //                     }
-
-                        // public function rejectReservation($id)
-                        // {
-                        //     $reservation = Reservation::findOrFail($id);
-                        //     $reservation->statut = 'refusé';
-                        //     $reservation->save();
-
-                        //     Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
-
-                        //     return back()->with('success', 'Réservation refusée avec succès !');
-                        // }
 
 
 
@@ -143,12 +122,6 @@ class ReservationController extends Controller
 
                             return response()->json(['success' => 'Réservation refusée avec succès !']);
                         }
-
-                        // public function getReservationCount($evenementId)
-                        // {
-                        //     $reservationsCount = Reservation::where('evenement_id', $evenementId)->count();
-                        //     return response()->json(['reservationsCount' => $reservationsCount]);
-                        // }
 
  public function getReservationCount($evenementId)
 {

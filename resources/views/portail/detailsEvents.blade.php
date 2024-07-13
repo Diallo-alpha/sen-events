@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    <meta name="user-authenticated" content="{{ Auth::check() ? 'true' : 'false' }}">
-    <meta name="event-id" content="{{ $evenement->id }}">
-    <meta name="places-disponibles" content="{{ $evenement->places_disponible }}">
 </head>
 <body>
     @include('portail.layouts.header')
@@ -24,7 +21,7 @@
             <div class="my-3">
                 <h5>Date</h5>
                 <p>{{ $evenement->date_evenement }}</p>
-                <button class="btn btn-primary" id="reserveButton">Réserver</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#reservationModal">Réserver</button>
             </div>
             <div class="mt-4">
                 <h5>Description de l'événement :</h5>
@@ -64,10 +61,10 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     <form action="{{ route('reservations.store') }}" method="POST" style="display: inline-block;">
                         @csrf
-                        <input type="hidden" name="evenement_id" id="modal_evenement_id" value="{{ $evenement->id }}">
+                        <input type="hidden" name="evenement_id" value="{{ $evenement->id }}">
                         @auth
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <button type="submit" id="confirmReservationButton" class="btn btn-primary">Confirmer</button>
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
                         @else
                             <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Se connecter pour réserver</button>
                         @endauth
@@ -98,9 +95,45 @@
         </div>
     </div>
 
+    @if(session('success'))
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Réservation réussie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('success') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/reservation.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            @if(session('success'))
+                $('#successModal').modal('show');
+            @endif
+        });
+    </script>
 </body>
 </html>

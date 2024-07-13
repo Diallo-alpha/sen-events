@@ -14,7 +14,7 @@ class PortailController extends Controller
     public function index()
     {
         // Récupérer uniquement les événements dont la date n'est pas dépassée et ajouter la pagination
-        $evenements = Evenement::where('date_evenement', '>=', Carbon::now())->paginate(9);
+        $evenements = Evenement::where('date_evenement', '>=', Carbon::now())->paginate(6);
         return view('portail.index', compact('evenements'));
     }
 
