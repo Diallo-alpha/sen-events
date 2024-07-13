@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PortailController extends Controller
 {
@@ -12,8 +13,8 @@ class PortailController extends Controller
      */
     public function index()
     {
-        //
-        $evenements = Evenement::all();
+        // Récupérer uniquement les événements dont la date n'est pas dépassée et ajouter la pagination
+        $evenements = Evenement::where('date_evenement', '>=', Carbon::now())->paginate(9);
         return view('portail.index', compact('evenements'));
     }
 
@@ -22,8 +23,8 @@ class PortailController extends Controller
      */
     public function details($id)
     {
-        $evenement = Evenement::find ($id);
-        return view('portail.detailsEvents',compact('evenement')) ;
+        $evenement = Evenement::find($id);
+        return view('portail.detailsEvents', compact('evenement'));
     }
 
     /**
