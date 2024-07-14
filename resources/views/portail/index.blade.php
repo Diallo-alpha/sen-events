@@ -114,16 +114,16 @@
                         <div class="card">
                             <img src="{{ asset('public/'.$evenement->photo) }}" alt="Image de l'événement" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $evenement->nom }}</h5>
+                                <h5 class="card-title"> <strong>{{ $evenement->nom }}</strong></h5>
                                 <p class="card-text">
-                                    <span class="text-danger">{{ $evenement->date_evenement }}</span><br>
-                                    <span class="text-primary"><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</span><br>
+                                    <span class="text-danger">Date Evenements: {{ $evenement->date_evenement }}</span><br>
+                                    <span class="text-primary"><img src="{{ asset('images/lieux.svg') }}" alt="lieux"><br> {{ $evenement->lieu }}</span><br>
                                     {{ Str::limit($evenement->description, 100) }}
                                     <br>
-                                    Places disponibles <strong>: {{ $evenement->places_disponible }}</strong><br>
-                                    Organisé par : <strong>{{ $evenement->organisme->nom }}</strong>
+                                    {{-- Places disponibles <strong>: {{ $evenement->places_disponible }}</strong><br> --}}
+                                    {{-- Organisé par : <strong>{{ $evenement->organisme->nom }}</strong> --}}
                                 </p>
-                                <a href="{{ route('details.events', $evenement->id) }}" class="btn btn-primary">Voir plus</a>
+                                <a href="{{ route('details.events', $evenement->id) }}" class="btn-plus">Voir plus</a>
                             </div>
                         </div>
                     </div>
