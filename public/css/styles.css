@@ -21,6 +21,10 @@ body {
     padding: 20px;
 }
 
+.a-events{
+    text-decoration: none !important;
+
+}
 .logo {
     background-color: var(--Primaire);
     color: white;

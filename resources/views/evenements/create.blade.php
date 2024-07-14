@@ -8,8 +8,9 @@
         </ul>
     </div>
 @endif
-
     <div class="container">
+        <br>
+        <a href="{{ route('organisme.dashboard') }}" class="btn btn-primary a-events">Retoure</a> <br>
         <h1 class="text-center">Créer un événement</h1>
         <form method="POST" action="{{ route('evenement.store') }}" enctype="multipart/form-data">
             @csrf
@@ -38,7 +39,7 @@
                 <input type="number" class="form-control" id="places_disponible" name="places_disponible" placeholder="Nombre de places disponibles">
             </div>
             <div class="form-group">
-                <label for="date_limite">Date Limite</label>
+                <label for="date_limite">Date Limite des inscriptions</label>
                 <input type="datetime-local" class="form-control" id="date_limite" name="date_limite" value="2024-07-20T14:00">
             </div>
             <button type="submit" class="btn btn-primary">Créer l'événement</button>
