@@ -18,25 +18,23 @@
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="col-md-6 right d-flex flex-column align-items-center justify-content-center right">
+            <div class="col-md-6 right">
                 <h1>Inscription</h1>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    <div class="sect1 d-flex">
-                        <div class="form-group mr-2">
-                            <label for="nom">Nom</label>
-                            <input type="text" class="form-control" id="nom" name="nom" placeholder="nom" value="{{ old('nom') }}" required>
-                            @if ($errors->has('nom'))
-                                <span class="text-danger">{{ $errors->first('nom') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group ml-2">
-                            <label for="prenom">Prénom</label>
-                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="{{ old('prenom') }}" required>
-                            @if ($errors->has('prenom'))
-                                <span class="text-danger">{{ $errors->first('prenom') }}</span>
-                            @endif
-                        </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="{{ old('nom') }}" required>
+                        @if ($errors->has('nom'))
+                            <span class="text-danger">{{ $errors->first('nom') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="{{ old('prenom') }}" required>
+                        @if ($errors->has('prenom'))
+                            <span class="text-danger">{{ $errors->first('prenom') }}</span>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -45,21 +43,19 @@
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         @endif
                     </div>
-                    <div class="sect1 d-flex">
-                        <div class="form-group mr-2">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group ml-2">
-                            <label for="confirm-password">Confirmer mot de passe</label>
-                            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Confirmer mot de passe" required>
-                            @if ($errors->has('password_confirmation'))
-                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
-                        </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+                        @if ($errors->has('password'))
+                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmer mot de passe</label>
+                        <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Confirmer mot de passe" required>
+                        @if ($errors->has('password_confirmation'))
+                            <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                        @endif
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
                 </form>
