@@ -10,6 +10,7 @@
 @endif
 <div class="container">
     <h1>Éditer l'événement</h1>
+    <a href="{{ route('organisme.dashboard') }}" class="btn btn-primary a-events">Retoure</a> <br>
     <form action="{{ route('evenement.update', $evenement->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -30,7 +31,7 @@
             <input type="number" name="places_disponible" id="places_disponible" class="form-control" value="{{ $evenement->places_disponible }}" required>
         </div>
         <div class="form-group">
-            <label for="date_limite">Date limite</label>
+            <label for="date_limite">Date limite des inscriptions</label>
             <input type="date" name="date_limite" id="date_limite" class="form-control" value="{{ $evenement->date_limite }}" required>
         </div>
         <div class="form-group">
