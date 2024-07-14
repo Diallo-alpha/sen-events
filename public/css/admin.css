@@ -28,116 +28,85 @@ body {
 }
 
 /* =============== Navigation ================ */
-/* =============== Navigation ================ */
 .navigation {
-    position: fixed;
-    width: 300px;
-    height: 100%;
-    background: var(--blue);
-    border-left: 10px solid var(--blue);
-    transition: 0.5s;
-    overflow: hidden;
-  }
-  .navigation.active {
-    width: 80px;
-  }
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: var(--blue);
+  border-left: 10px solid var(--blue);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
 
-  .navigation ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 
-  .navigation ul li {
-    position: relative;
-    width: 100%;
-    list-style: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-  }
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
 
-  .navigation ul li:hover,
-  .navigation ul li.hovered,
-  .navigation ul li.active {
-    background-color: var(--white);
-  }
+.navigation ul li:hover,
+.navigation ul li.hovered,
+.navigation ul li.active {
+  background-color: var(--white);
+}
 
-  .navigation ul li:nth-child(1) {
-    margin-bottom: 40px;
-    pointer-events: none;
-  }
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
 
-  .navigation ul li a {
-    position: relative;
-    display: block;
-    width: 100%;
-    display: flex;
-    text-decoration: none;
-    color: var(--white);
-  }
-  .navigation ul li:hover a,
-  .navigation ul li.hovered a,
-  .navigation ul li.active a {
-    color: var(--blue);
-  }
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a,
+.navigation ul li.active a {
+  color: var(--blue);
+}
 
-  .navigation ul li a .icon {
-    position: relative;
-    display: block;
-    min-width: 60px;
-    height: 60px;
-    line-height: 75px;
-    text-align: center;
-  }
-  .navigation ul li a .icon ion-icon {
-    font-size: 1.75rem;
-  }
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+.navigation ul li a .icon ion-icon {
+  font-size: 1.75rem;
+}
 
-  .navigation ul li a .title {
-    position: relative;
-    display: block;
-    padding: 0 10px;
-    height: 60px;
-    line-height: 60px;
-    text-align: start;
-    white-space: nowrap;
-  }
-
-  /* --------- curve outside ---------- */
-  .navigation ul li:hover a::before,
-  .navigation ul li.hovered a::before,
-  .navigation ul li.active a::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
-    pointer-events: none;
-  }
-  .navigation ul li:hover a::after,
-  .navigation ul li.hovered a::after,
-  .navigation ul li.active a::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events: none;
-  }
-
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
 
 /* --------- curve outside ---------- */
 .navigation ul li:hover a::before,
-.navigation ul li.hovered a::before {
+.navigation ul li.hovered a::before,
+.navigation ul li.active a::before {
   content: "";
   position: absolute;
   right: 0;
@@ -150,7 +119,8 @@ body {
   pointer-events: none;
 }
 .navigation ul li:hover a::after,
-.navigation ul li.hovered a::after {
+.navigation ul li.hovered a::after,
+.navigation ul li.active a::after {
   content: "";
   position: absolute;
   right: 0;
@@ -291,39 +261,36 @@ body {
 .cardBox .card:hover .iconBx {
   color: var(--white);
 }
+
+/* ===================== Table Styles ====================== */
 .custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .custom-table th,
 .custom-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
 }
 
 .custom-table th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 @media (max-width: 768px) {
-    .custom-table {
-        overflow-x: auto;
-        display: block;
-    }
+  .custom-table {
+    overflow-x: auto;
+    display: block;
+  }
 
-    .custom-table th,
-    .custom-table td {
-        white-space: nowrap;
-    }
+  .custom-table th,
+  .custom-table td {
+    white-space: nowrap;
+  }
 }
-/* ================== Order Details List ============== */
-
-
-
-
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {
@@ -387,47 +354,53 @@ body {
     left: initial;
   }
 }
-/*style pour le formulaire */
 
+/* Form Styles */
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .btn-primary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
 
 .alert {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .table {
-    width: 100%;
-    margin-top: 20px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .table th,
 .table td {
-    padding: 10px;
+  padding: 10px;
 }
 
 .table-bordered {
-    border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .badge {
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    margin-right: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
