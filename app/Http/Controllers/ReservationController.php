@@ -13,14 +13,14 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        // Retrieve all reservations for the authenticated user
+        // Récupérer toutes les réservations pour l'utilisateur authentifié
         $reservations = Reservation::where('user_id', auth()->id())->get();
         return view('reservations.index', compact('reservations'));
     }
 
     public function create($id)
     {
-        // Find the event by its ID
+        // Trouver l'événement par son ID
         $evenement = Evenement::find($id);
         if (!$evenement) {
             return redirect()->back()->with('error', 'Événement non trouvé');
@@ -30,47 +30,52 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the form data
+        // Valider les données du formulaire
         $request->validate([
             'evenement_id' => 'required|exists:evenements,id',
             'user_id' => 'required|exists:users,id',
         ]);
 
-        // Find the corresponding event
+        // Trouver l'événement correspondant
         $evenement = Evenement::findOrFail($request->evenement_id);
 
-        // Check if the deadline has passed
+        // Vérifier si la date limite est passée
         if (Carbon::now()->gt($evenement->date_limite)) {
             return redirect()->back()->with('error', 'La date limite pour les réservations de cet événement est dépassée.');
         }
 
-        // Check if there are available spots
+        // Vérifier s'il reste des places disponibles
         $reservationsCount = Reservation::where('evenement_id', $evenement->id)->count();
         if ($reservationsCount >= $evenement->places_disponible) {
             return redirect()->back()->with('error', 'Désolé, il n\'y a plus de places disponibles pour cet événement.');
         }
 
-        // Create the reservation
+        // Créer la réservation
         $reservation = new Reservation();
         $reservation->evenement_id = $evenement->id;
         $reservation->user_id = $request->user_id;
         $reservation->statut = 'accepter';
         $reservation->save();
 
-        // Send a confirmation email
+        // Envoyer un email de confirmation
         Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-        return redirect()->back()->with('success', 'Réservation créée avec succès.');
+        return redirect()->back()->with('success', 'Réservation effectuer avec succès.');
     }
 
     public function show($id)
     {
-        // Find the event by its ID
+        // Trouver l'événement par son ID
         $evenement = Evenement::find($id);
         if (!$evenement) {
             return redirect()->back()->with('error', 'Événement non trouvé');
         }
-        return view('portail.detailsEvents', compact('evenement'));
+
+        // Obtenir le nombre de réservations pour l'événement
+        $reservationsCount = Reservation::where('evenement_id', $evenement->id)->count();
+
+        // Passer l'événement et le nombre de réservations à la vue
+        return view('portail.detailsEvents', compact('evenement', 'reservationsCount'));
     }
 
     public function edit(Reservation $reservation)
@@ -80,89 +85,89 @@ class ReservationController extends Controller
 
     public function update(Request $request, Reservation $reservation)
     {
-        // Validate the form data
+        // Valider les données du formulaire
         $request->validate([
             'evenement_id' => 'required|exists:evenements,id',
             'user_id' => 'required|exists:users,id',
             'statut' => 'required|string',
         ]);
 
-        // Update the reservation
+        // Mettre à jour la réservation
         $reservation->update($request->all());
         return redirect()->route('reservations.index')->with('success', 'Réservation mise à jour avec succès.');
     }
 
     public function destroy(Reservation $reservation)
     {
-        // Delete the reservation
+        // Supprimer la réservation
         $reservation->delete();
         return redirect()->route('reservations.index')->with('success', 'Réservation supprimée avec succès.');
     }
 
+    public function approveReservation($id)
+    {
+        // Approuver la réservation
+        $reservation = Reservation::findOrFail($id);
+        $reservation->statut = 'approuvé';
+        $reservation->save();
 
+        // Envoyer un email de confirmation
+        Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-                        public function approveReservation($id)
-                        {
-                            $reservation = Reservation::findOrFail($id);
-                            $reservation->statut = 'approuvé';
-                            $reservation->save();
+        return response()->json(['success' => 'Réservation approuvée avec succès !']);
+    }
 
-                            Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
+    public function rejectReservation($id)
+    {
+        // Refuser la réservation
+        $reservation = Reservation::findOrFail($id);
+        $reservation->statut = 'refusé';
+        $reservation->save();
 
-                            return response()->json(['success' => 'Réservation approuvée avec succès !']);
-                        }
+        // Envoyer un email de notification
+        Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
 
-                        public function rejectReservation($id)
-                        {
-                            $reservation = Reservation::findOrFail($id);
-                            $reservation->statut = 'refusé';
-                            $reservation->save();
+        return response()->json(['success' => 'Réservation refusée !']);
+    }
 
-                            Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
+    public function getReservationCount($evenementId)
+    {
+        // Obtenir le nombre de réservations pour l'événement
+        $reservationsCount = Reservation::where('evenement_id', $evenementId)->count();
+        $evenement = Evenement::findOrFail($evenementId);
+        $placesRestantes = $evenement->places_disponible - $reservationsCount;
 
-                            return response()->json(['success' => 'Réservation refusée avec succès !']);
-                        }
+        return response()->json([
+            'reservationsCount' => $reservationsCount,
+            'placesRestantes' => $placesRestantes
+        ]);
+    }
 
- public function getReservationCount($evenementId)
-{
-    $reservationsCount = Reservation::where('evenement_id', $evenementId)->count();
-    $evenement = Evenement::findOrFail($evenementId);
-    $placesRestantes = $evenement->places_disponible - $reservationsCount;
+    public function showAcceptedReservations($evenementId)
+    {
+        // Afficher les réservations acceptées pour l'événement
+        $evenement = Evenement::findOrFail($evenementId);
+        $reservations = Reservation::where('evenement_id', $evenementId)
+                                   ->where('statut', 'approuvé')
+                                   ->get();
+        $reservationsCount = $reservations->count();
+        $evenementsCount = Evenement::count();
+        $placesRestantes = $evenement->places_disponible - $reservationsCount;
 
-    return response()->json([
-        'reservationsCount' => $reservationsCount,
-        'placesRestantes' => $placesRestantes
-    ]);
-}
+        return view('organisme.dashboard_accepted', compact('evenement', 'reservations', 'reservationsCount', 'evenementsCount', 'placesRestantes'));
+    }
 
+    public function showRejectedReservations($evenementId)
+    {
+        // Afficher les réservations refusées pour l'événement
+        $evenement = Evenement::findOrFail($evenementId);
+        $reservations = Reservation::where('evenement_id', $evenementId)
+                                   ->where('statut', 'refusé')
+                                   ->get();
+        $reservationsCount = $reservations->count();
+        $evenementsCount = Evenement::count();
+        $placesRestantes = $evenement->places_disponible - $reservationsCount;
 
-
-                        public function showAcceptedReservations($evenementId)
-                        {
-                            $evenement = Evenement::findOrFail($evenementId);
-                            $reservations = Reservation::where('evenement_id', $evenementId)
-                                                       ->where('statut', 'approuvé')
-                                                       ->get();
-                            $reservationsCount = $reservations->count();
-                            $evenementsCount = Evenement::count();
-                            $placesRestantes = $evenement->places_disponible - $reservationsCount;
-
-                            return view('organisme.dashboard_accepted', compact('evenement', 'reservations', 'reservationsCount', 'evenementsCount', 'placesRestantes'));
-                        }
-
-                        public function showRejectedReservations($evenementId)
-                        {
-                            $evenement = Evenement::findOrFail($evenementId);
-                            $reservations = Reservation::where('evenement_id', $evenementId)
-                                                       ->where('statut', 'refusé')
-                                                       ->get();
-                            $reservationsCount = $reservations->count();
-                            $evenementsCount = Evenement::count();
-                            $placesRestantes = $evenement->places_disponible - $reservationsCount;
-
-                            return view('organisme.dashboard_rejected', compact('evenement', 'reservations', 'reservationsCount', 'evenementsCount', 'placesRestantes'));
-                        }
-
-
-
+        return view('organisme.dashboard_rejected', compact('evenement', 'reservations', 'reservationsCount', 'evenementsCount', 'placesRestantes'));
+    }
 }
