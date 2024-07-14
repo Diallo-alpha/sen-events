@@ -13,8 +13,7 @@
         <div class="logo">Sen-Events</div>
         <div class="nav-links">
             <a href="{{ route('portail.index') }}" class="nav-link">Accueil</a>
-            <a href="{{ route('portail.evenements') }}" class="nav-link">Événements</a>
-            <a href="#a-propos" class="nav-link">À Propos</a>
+            <a href="#" class="nav-link">Événements</a>
         </div>
 
         @if (Auth::guard('web')->check())
@@ -87,26 +86,10 @@
         </div>
     </section>
 
-    <section id="a-propos">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center mb-4 a-propos">
-                    <h2 class="titre-section">À propos de nous</h2>
-                </div>
-                <div class="col-md-6">
-                    <p class="lead">Bienvenue sur notre plateforme de gestion d'événements, votre partenaire de confiance pour organiser, planifier et réussir tous vos événements. Nous offrons des outils intuitifs et puissants pour simplifier chaque étape de la gestion d'événements, des inscriptions aux réservations en passant par la communication. Que vous organisiez une petite réunion ou une grande conférence, notre mission est de vous aider à créer des expériences inoubliables.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="{{ asset('images/a-propos.svg') }}" alt="Image de deux personnes s'aidant mutuellement à grimper une montagne" class="img-fluid rounded">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center mb-4 a-propos">
+                <div class="col-md-12 text-center mb-4">
                     <h2 class="titre-section">Événements</h2>
                 </div>
                 @foreach($evenements as $evenement)

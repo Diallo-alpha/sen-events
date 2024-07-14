@@ -17,7 +17,11 @@ class PortailController extends Controller
         $evenements = Evenement::where('date_evenement', '>=', Carbon::now())->paginate(6);
         return view('portail.index', compact('evenements'));
     }
-
+    public function evenements()
+    {
+        $evenements = Evenement::where('date_evenement', '>=', Carbon::now())->paginate(6);
+        return view('portail.evenements', compact('evenements'));
+    }
     /**
      * Show the form for creating a new resource.
      */

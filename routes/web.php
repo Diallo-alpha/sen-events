@@ -8,7 +8,7 @@ use App\Http\Controllers\ReservationController;
 Route::get('/', [PortailController::class, 'index'])->name('portail.index');
 
 Route::get('/detailes-evenements/{id}', [PortailController::class, 'details'])->name('details.events');
-
+Route::get('/evenements', [PortailController::class, 'evenements'])->name('portail.evenements');
 
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';
