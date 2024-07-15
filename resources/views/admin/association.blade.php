@@ -54,7 +54,7 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Adresse</th>
-                <th>Coordonnées</th>
+                <th>Date de création</th>
                 <th>Statut</th>
                 <th>Actions</th>
             </tr>
@@ -64,14 +64,14 @@
                 <tr>
                     <td>{{ $association->nom }}</td>
                     <td>{{ $association->description }}</td>
-                    <td>{{ $association->address }}</td>
-                    <td>{{ $association->contact_details }}</td>
+                    <td>{{ $association->adresse }}</td>
+                    <td>{{ $association->date_creation}}</td>
                     <td>{{ $association->is_active ? 'Active' : 'Désactivée' }}</td>
                     <td>
                         <form action="{{ route('admin.associations.toggle', $association->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="btn btn-warning">{{ $association->is_active ? 'Désactiver' : 'Activer' }}</button>
+                            <button type="submit" class="btn btn-primary">{{ $association->is_active ? 'Désactiver' : 'Activer' }}</button>
                         </form>
                         <form action="{{ route('admin.associations.delete', $association->id) }}" method="POST" style="display:inline;">
                             @csrf

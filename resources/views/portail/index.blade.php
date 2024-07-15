@@ -110,24 +110,24 @@
                     <h2 class="titre-section">Événements</h2>
                 </div>
                 @foreach($evenements as $evenement)
+                @if($evenement->organisme->is_active)
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             <img src="{{ asset('public/'.$evenement->photo) }}" alt="Image de l'événement" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title"> <strong>{{ $evenement->nom }}</strong></h5>
+                                <h5 class="card-title"><strong>{{ $evenement->nom }}</strong></h5>
                                 <p class="card-text">
-                                    <span class="text-danger">Date Evenements: {{ $evenement->date_evenement }}</span><br>
+                                    <span class="text-danger">Date Événement: {{ $evenement->date_evenement }}</span><br>
                                     <span class="text-primary"><img src="{{ asset('images/lieux.svg') }}" alt="lieux"><br> {{ $evenement->lieu }}</span><br>
                                     {{ Str::limit($evenement->description, 100) }}
                                     <br>
-                                    {{-- Places disponibles <strong>: {{ $evenement->places_disponible }}</strong><br> --}}
-                                    {{-- Organisé par : <strong>{{ $evenement->organisme->nom }}</strong> --}}
                                 </p>
                                 <a href="{{ route('details.events', $evenement->id) }}" class="btn-plus">Voir plus</a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endif
+            @endforeach
             </div>
             <div class="d-flex justify-content-center">
                 {{ $evenements->links('pagination::bootstrap-4') }}

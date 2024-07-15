@@ -24,8 +24,8 @@
                 <button class="btn btn-primary" data-toggle="modal" data-target="#reservationModal">Réserver</button>
             </div>
             <div class="mt-4">
-                <h5>Description de l'événement :</h5>
-                <p>{{ $evenement->description }}</p>
+                {{-- <h5>Description de l'événement :</h5>
+                <p>{{ $evenement->description }}</p> --}}
             </div>
             <div class="mt-4">
                 <h5>Organisme :</h5>

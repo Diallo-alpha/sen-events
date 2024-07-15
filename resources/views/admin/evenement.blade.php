@@ -63,7 +63,7 @@
                         <tr>
                             <td>{{ $event->nom }}</td>
                             <td>{{ $event->description }}</td>
-                            <td>{{ $event->date }}</td>
+                            <td>{{ $event->date_evenement}}</td>
                             <td>{{ $event->organisme->nom }}</td>
                             <td>
                                 {{-- <a href="{{ route('admin.events.show', $event->id) }}" class="btn btn-info">Détails</a> --}}
